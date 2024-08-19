@@ -23,7 +23,7 @@ export default function NavBar() {
     <ThemeProvider theme={navBarTheme}>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" >
-        <Toolbar variant={"dense"} sx={{ justifyContent: 'space-between' }}>
+        <Toolbar variant={"regular"} sx={{ justifyContent: 'space-between' }}>
           <IconButton
             size="large"
             edge="start"
@@ -33,8 +33,8 @@ export default function NavBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" >
-            News
+          <Typography sx={{mb:-5}} component="div" >
+            <img width={200} src={"/shopLogo.png"}/>
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>

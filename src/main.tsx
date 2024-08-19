@@ -7,10 +7,7 @@ import {ComponentPreviews, useInitial} from "./dev";
 
 createRoot(document.getElementById('root')!).render(
 
-  <DevSupport
-    ComponentPreviews={<ComponentPreviews />}
-    useInitialHook={useInitial}
-  >
+    <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
   <App />
 </DevSupport>
 

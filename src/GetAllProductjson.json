@@ -1,0 +1,119 @@
+[
+  {
+    "pid": 32,
+    "name": "Nike Pegasus Trail 5 GORE-TEX",
+    "description": "Nike Pegasus Trail 5 GORE-TEX 女子防水越野跑步鞋有效應對潮濕天氣。 防水 GORE-TEX 鞋面、適合各種地形的外底和反光細節助你舒適抵禦惡劣天氣。 結合 ReactX 泡綿中底，提供回彈緩震效能，帶來充滿活力的步履體驗",
+    "imageUrl": "https://static.nike.com.hk/resources/product/FQ0912-101/FQ0912-101_VL1.png",
+    "price": 1199.00,
+    "hasStock": true,
+    "category": "womenShoes"
+  },
+  {
+    "pid": 33,
+    "name": "Nike Pegasus Plus",
+    "description": "Nike Pegasus Plus 女子公路跑步鞋帶來出眾回彈緩震效能。 採用全掌式超輕盈 ZoomX 泡綿，為日常跑步提供出色的能量回傳效果。 彈性 Flyknit 飛織鞋面緊貼雙足，帶來流暢貼合的腳感。",
+    "imageUrl": "https://static.nike.com.hk/resources/product/FQ7261-800/FQ7261-800_VL1.png",
+    "price": 1299.00,
+    "hasStock": true,
+    "category": "womenShoes"
+  },
+  {
+    "pid": 34,
+    "name": "Nike Vaporfly 3 Electric",
+    "description": "加快腳步，追趕別人。 Nike Vaporfly 3 Electric 男子公路賽跑運動鞋專為追逐者、競速者和進階跑者設計，為你帶來比賽級速度，輕鬆駕馭目標距離。 匠心鞋底設計，無論是 10 公里賽跑還是馬拉松，皆可屢創個人新紀錄。 精英跑手還是新手，這款公路賽跑運動鞋都可助你完成遙不可及的任務。",
+    "imageUrl": "https://static.nike.com.hk/resources/product/FV2305-900/FV2305-900_VL1.png",
+    "price": 1799.00,
+    "hasStock": true,
+    "category": "menShoes"
+  },
+  {
+    "pid": 35,
+    "name": "Nike Pegasus EasyOn Electric",
+    "description": "Nike Pegasus EasyOn Electric 男子公路跑步鞋採用回彈緩震設計，為日常公路練跑注入活力。兩個 Air Zoom 氣墊結合 ReactX 泡綿中底，打造更輕盈的能量回傳效果。鞋面採用機能網眼設計，更為輕盈透氣。",
+    "imageUrl": "https://static.nike.com.hk/resources/product/HF5457-900/HF5457-900_VL1.png",
+    "price": 1049.00,
+    "hasStock": true,
+    "category": "menShoes"
+  },
+  {
+    "pid": 36,
+    "name": "SKECHERS SLIP INS: GO RUN 7.0",
+    "description": "Slip-Ins 速穿科技，解放雙手，助你日常穿脫更便捷。",
+    "imageUrl": "https://www.skechers.com.hk/cdn/shop/files/129345_LTPK_1_2048x2048.jpg?v=1713351217",
+    "price": 1199.00,
+    "hasStock": true,
+    "category": "womenShoes"
+  },
+  {
+    "pid": 37,
+    "name": "SKECHERS SLIP INS: MAX CUSHIONING ARCH FIT",
+    "description": "Slip-Ins 速穿科技，解放雙手，助你日常穿脫更便捷。",
+    "imageUrl": "https://www.skechers.com.hk/cdn/shop/products/220347_BKRD_1_2048x2048.jpg?v=1706076442",
+    "price": 1199.00,
+    "hasStock": true,
+    "category": "menShoes"
+  },
+  {
+    "pid": 38,
+    "name": "HOKA Mach 6",
+    "description": "Behold our lightest, most responsive Mach to date. This lively trainer has been fine-tuned for extra energy return with a super critical foam midsole and updated for enhanced durability with strategic rubber coverage in the outsole. Implementing speed focused design details throughout, we’ve enlisted a new creel jacquard upper with zonal breathability and an internal gusset to deliver the foot-hugging comfort required to set your next PR.",
+    "imageUrl": "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1718141189/1147790-ECC_1.png",
+    "price": 1399.00,
+    "hasStock": true,
+    "category": "menShoes"
+  },
+  {
+    "pid": 39,
+    "name": "HOKA Clifton 9",
+    "description": "The ninth iteration of our award-winning Clifton franchise has launched, lighter and more cushioned than ever before. Eliminating weight while adding 3mm in stack height, the new Clifton 9 delivers a revitalized underfoot experience with a responsive new foam and improved outsole design. Removing overlays and hotmelts, the stripped back upper has been consciously crafted with a plusher heel, reflective heel panel, and streamlined tongue with single side medial gusset.",
+    "imageUrl": "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1702563009/EMEA/1127895-DLL_1.png",
+    "price": 1599.00,
+    "hasStock": true,
+    "category": "menShoes"
+  },
+  {
+    "pid": 40,
+    "name": "HOKA Skyflow",
+    "description": "Designed to elevate your daily running practice, the Skyflow combines premium Skyward X-inspired geometry with upgraded foam compounds, taking everyday miles to the next level. Super-critically foamed EVA offers an extra cushy, springy ride, while a supportive heel-focused Active Foot Frame™ cradles the foot and a smooth forefoot rocker profile encourages effortless strides. Constructed with a sleek upper and extra durable outsole, this shoe redefines the idea of “daily driver.”",
+    "imageUrl": "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1715808697/1155113-MTW_1.png",
+    "price": 1899.00,
+    "hasStock": true,
+    "category": "womenShoes"
+  },
+  {
+    "pid": 41,
+    "name": "HOKA Mach 6",
+    "description": "Behold our lightest, most responsive Mach to date. This lively trainer has been fine-tuned for extra energy return with a super critical foam midsole and updated for enhanced durability with strategic rubber coverage in the outsole. Implementing speed focused design details throughout, we’ve enlisted a new creel jacquard upper with zonal breathability and an internal gusset to deliver the foot-hugging comfort required to set your next PR.",
+    "imageUrl": "https://dms.deckers.com/hoka/image/upload/f_auto,q_auto,dpr_auto/b_rgb:f7f7f9/w_1110/v1719294991/1147810-WTLT_1.png",
+    "price": 1399.00,
+    "hasStock": true,
+    "category": "womenShoes"
+  },
+  {
+    "pid": 42,
+    "name": "CEGERO STRENGTH 跑步腰包 THIRST 0.6 L",
+    "description": "產品資訊及功能:\n• 簡單拉鍊一袋式設計配備足夠儲物空間\n• 設網袋及橡筋繫帶固定水樽\n• 強韌腰帶減少運動時晃動\n",
+    "imageUrl": "https://contents.mediadecathlon.com/m14384625/k$f2e9dbfedacdd783d3972290cb18084f/%E8%B7%91%E6%AD%A5%E8%85%B0%E5%8C%85-thirst-0-6-l-%E6%B9%96%E6%B0%B4%E7%B6%A0%E8%89%B2-cegero-strength-fb468adf-fb44-4f2a-bff9-b9e673edbc25.jpg",
+    "price": 118.00,
+    "hasStock": true,
+    "category": "accessories"
+  },
+  {
+    "pid": 43,
+    "name": "KIPRUN 輕量越野跑腰包",
+    "description": "你可攜帶一個 500 mL 水壺、2 條能量膠、2 根穀物棒、手機、參賽號碼及越野跑杖。這些越野跑杖方常輕盈、穩定且舒適，會讓你忘了它們的存在。",
+    "imageUrl": "https://contents.mediadecathlon.com/p2174778/k$e7ded4e18b373bdf95b043377d4d90ff/%E8%BC%95%E9%87%8F%E8%B6%8A%E9%87%8E%E8%B7%91%E8%85%B0%E5%8C%85-kiprun-8612400.jpg",
+    "price": 199.00,
+    "hasStock": true,
+    "category": "accessories"
+  },
+  {
+    "pid": 44,
+    "name": "KIPRUN 男女款多隔層跑步手機臂套",
+    "description": "你可以戴上這款實在的跑步臂套，輕鬆攜帶手機和小型隨身物品並確保安全。\n我們的跑步團隊為想要安心地攜帶智慧型手機和小型物品的男女跑者設計了這款多隔層跑步臂套。",
+    "imageUrl": "https://contents.mediadecathlon.com/p2700831/k$a5cdb8e60d4f398e2d7f8e04bebdda62/%E7%94%B7%E5%A5%B3%E6%AC%BE%E5%A4%9A%E9%9A%94%E5%B1%A4%E8%B7%91%E6%AD%A5%E6%89%8B%E6%A9%9F%E8%87%82%E5%A5%97-kiprun-%E9%BB%83%E8%89%B2%E5%8F%8A%E7%81%B0%E8%89%B2-kiprun-8797732.jpg",
+    "price": 89.00,
+    "hasStock": true,
+    "category": "accessories"
+  }
+]
