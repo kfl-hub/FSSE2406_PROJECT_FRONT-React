@@ -10,7 +10,8 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import CallMadeIcon from '@mui/icons-material/CallMade';
-import {ProductDto} from "../../../../type/Product.type.ts";
+import {ProductDto} from "../../type/Product.type.ts";
+import {useNavigate} from "react-router-dom";
 
 type Props = {
     productDto: ProductDto
@@ -21,6 +22,12 @@ type Props = {
 
 export default function ProductCard({productDto}: Props) {
     const [expanded, setExpanded] = React.useState(false);
+
+    const navigate = useNavigate();
+
+    const handleNavigateToProductDetail=()=>{
+        navigate("/PD")
+    }
 
     const truncateText = (wordLimit:number):string => {
         const words = productDto.description.split(' ');
@@ -52,7 +59,7 @@ export default function ProductCard({productDto}: Props) {
                 height="230"
                 image={productDto.imageUrl}
                 alt="Product Image"
-                onClick={handleImageClick}
+                onClick={handleNavigateToProductDetail}
 
             />
             <CardContent>

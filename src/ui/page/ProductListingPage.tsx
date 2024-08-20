@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
-import ProductCard from "./ProductCard.tsx";
+import ProductCard from "../component/ProductCard.tsx";
 import {useEffect, useState} from "react";
-import {ProductDto} from "../../../../type/Product.type.ts";
-import {getAllProduct} from "../../../../api/GetProductApi.tsx";
+import {ProductDto} from "../../type/Product.type.ts";
+import {getAllProduct} from "../../api/GetProductApi.tsx";
 import {CircularProgress} from "@mui/material";
-import { LinearProgress } from '@mui/material';
+
 
 export default function ProductListingPage() {
     const [productDtoList, setProductDtoList] = useState<ProductDto[]>([]);

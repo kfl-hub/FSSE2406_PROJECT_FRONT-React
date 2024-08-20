@@ -7,6 +7,11 @@
         <option name="scriptName" value="dev" />
         <option name="url" value="http://localhost:5173/" />
       </DevServerState>
+      <DevServerState>
+        <option name="packageJsonPath" value="$PROJECT_DIR$/package.json" />
+        <option name="scriptName" value="dev" />
+        <option name="url" value="http://localhost:5174" />
+      </DevServerState>
     </option>
   </component>
 </project>

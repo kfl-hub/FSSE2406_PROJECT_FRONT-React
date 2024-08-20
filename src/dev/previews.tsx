@@ -3,7 +3,11 @@ import {PaletteTree} from "./palette";
 import App from "../App.tsx";
 import ProductListingPage from "../ui/page/FrontPage";
 import FrontPage from "../ui/page/FrontPage";
-import ProductCard from "../ui/page/FrontPage/component/ProductCard.tsx";
+import ProductCard from "../ui/component/ProductCard.tsx";
+import PrimarySearchAppBar from "../ui/component/DemoAppBar.tsx";
+import NavBar from "../ui/component/NavBar.tsx";
+import ProductInformPage from "../ui/page/ProductDetailPage.tsx";
+import QuantitySelector from "../ui/component/QuantitySelector.tsx";
 
 const ComponentPreviews = () => {
   return (
@@ -19,6 +23,18 @@ const ComponentPreviews = () => {
         </ComponentPreview>
         <ComponentPreview path="/ProductCard">
             <ProductCard/>
+        </ComponentPreview>
+        <ComponentPreview path="/PrimarySearchAppBar">
+            <PrimarySearchAppBar/>
+        </ComponentPreview>
+        <ComponentPreview path="/NavBar">
+            <NavBar/>
+        </ComponentPreview>
+        <ComponentPreview path="/ProductInformPage">
+            <ProductInformPage/>
+        </ComponentPreview>
+        <ComponentPreview path="/QuantitySelector">
+            <QuantitySelector/>
         </ComponentPreview>
     </Previews>
   );
