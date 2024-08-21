@@ -4,18 +4,17 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 type Props={
-    cartDisable:boolean
+    cartDisable:boolean,
+    quantity:number,
+    handleIncrement:()=>void,
+    handleDecrement:()=>void,
+    handleQuantityChange:(value:string)=>void
 }
 
-function QuantitySelector({cartDisable}:Props) {
+function QuantitySelector({cartDisable,quantity,handleDecrement,handleIncrement,handleQuantityChange}:Props) {
 const [removeDisable,setRemoveDisable]=useState(true);
 
-    const [quantity, setQuantity] = useState(1);
-
-    const handleIncrement = () => setQuantity((prev) => prev + 1);
-    const handleDecrement = () => {setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
-    };
-useEffect(()=>{
+useEffect(():void=>{
     (quantity<=1)?
         setRemoveDisable(true):
         setRemoveDisable(false)
@@ -34,10 +33,10 @@ useEffect(()=>{
             </Button>
             <TextField
                 value={quantity}
-                onChange={(e) => setQuantity(Math.max(1, Number(e.target.value)))}
-                type="number"
-                inputProps={{min: 1}}
-                sx={{width: 80, textAlign: 'center', textJustify: "center"}}
+                variant={"standard"}
+                onChange={(e) => (handleQuantityChange(e.target.value))}
+                inputProps={{min: 1,style: { textAlign: 'center' }}}
+                sx={{width: 50}}
             />
             <Button onClick={handleIncrement} variant={"contained"} disabled={cartDisable}>
                 <AddIcon/>

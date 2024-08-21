@@ -38,7 +38,8 @@ export default function ProductListingPage() {
             alignItems: 'center',
             justifyContent: 'center',
             flexWrap: "wrap",
-            minHeight: '100vh'
+            minHeight: '100vh',
+            width:"100%"
         }}>
             {productDtoList
                 ? renderProductCard() :

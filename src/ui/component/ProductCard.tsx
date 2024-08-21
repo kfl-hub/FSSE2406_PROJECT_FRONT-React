@@ -12,6 +12,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import CallMadeIcon from '@mui/icons-material/CallMade';
 import {GetProductDto} from "../../type/Product.type.ts";
 import {useNavigate} from "react-router-dom";
+import {Tooltip} from "@mui/material";
 
 type Props = {
     productDto: GetProductDto
@@ -41,7 +42,8 @@ export default function ProductCard({productDto,onProductClick}: Props) {
 
 
     return (
-        <Card sx={{width: 350, height: 500, m: 2, border: 1, display: 'flex', flexDirection: 'column'}}>
+        <Card sx={{width: 350, height: 500,
+            m: 2, border: 1, display: 'flex', flexDirection: 'column'}}>
             <CardHeader sx={{height:110,mb:-2}}
                 action={
                     <IconButton aria-label="go detail" onClick={()=>onProductClick(productDto.pid)}>
@@ -51,6 +53,7 @@ export default function ProductCard({productDto,onProductClick}: Props) {
                 title={productDto.name}
                 subheader={"$" + productDto.price + ".0"}
             />
+            <Tooltip title="Product Detail" placement={"top"}>
             <CardMedia
                 sx={{mb:-2}}
                 component="img"
@@ -60,6 +63,7 @@ export default function ProductCard({productDto,onProductClick}: Props) {
                 onClick={()=>handleNavigateToProductDetail(productDto.pid)}
 
             />
+            </Tooltip>
             <CardContent>
                 <Typography variant="body1"
                             color="text.secondary"

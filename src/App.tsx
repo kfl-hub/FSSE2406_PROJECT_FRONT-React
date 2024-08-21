@@ -6,6 +6,12 @@ import '@fontsource/roboto/700.css';
 import { RouterProvider} from "react-router-dom";
 import {router} from "./config/router/ReactRouterConfig.tsx";
 import {createTheme, ThemeProvider} from "@mui/material";
+import {createContext, useEffect, useState} from "react";
+import {UserData} from "./type/User.type.ts";
+import * as FirebaseAuthService from "./authService/FIrebaseAuthService.ts";
+import {LoginUserContext} from "./context/LoginUserContext.ts";
+
+
 const myTheme = createTheme({
   components: {
     MuiButton: {
@@ -25,10 +31,18 @@ const myTheme = createTheme({
   },
 });
 function App() {
-console.log("Run App")
+const [loginUser,setLoginUser]=useState<UserData|null|undefined>(undefined);
+
+  useEffect(()=>{
+    FirebaseAuthService.handleOnAuthStateChanged(setLoginUser);
+  },[])
+
+
   return (
 <ThemeProvider theme={myTheme}>
+<LoginUserContext.Provider value={loginUser}>
       <RouterProvider router={router}/>
+</LoginUserContext.Provider>
 </ThemeProvider>
   )
 }

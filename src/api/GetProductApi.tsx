@@ -7,7 +7,7 @@ const response=await axios.get("http://localhost:8080/public/product");
 return response.data;
 }catch(err){
     console.error(err);
-    //rethrow
+    throw(err)
 
 }}
 
@@ -17,6 +17,5 @@ export const getProductById=async (pid:number)=>{
         return response.data;
     }catch(err){
         console.error(err);
-        //rethrow
-
+        throw(err)
     }}

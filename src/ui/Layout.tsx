@@ -10,15 +10,22 @@ export default function Layout() {
             <Box sx={{
 
                 background: `url('/runner-3601960_1920.jpg'),radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%)`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundSize: 'inherit',
+                backgroundPosition: '',
                 backgroundRepeat: 'no-repeat',
                 display: 'flex',
                 flexDirection: 'column',
-                height: '100vh', // Ensure the Box takes the full height of the viewport
+                alignContent:"space-between",
+                height: '100%',
             }}>
                 <NavBar />
-                <Box sx={{ flex: 1 }}>
+                <Box sx={{
+                    // flex: 1, // This ensures the Outlet takes up the remaining space
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
                     <Outlet />
                 </Box>
                 <BottomNav />

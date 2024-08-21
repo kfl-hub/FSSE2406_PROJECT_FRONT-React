@@ -9,6 +9,7 @@ import NavBar from "../ui/component/NavBar.tsx";
 import ProductInformPage from "../ui/page/ProductDetailPage.tsx";
 import QuantitySelector from "../ui/component/QuantitySelector.tsx";
 import ProductDetailPage from "../ui/page/ProductDetailPage.tsx";
+import LoginPage from "../ui/page/LoginPage.tsx";
 
 const ComponentPreviews = () => {
   return (
@@ -39,6 +40,9 @@ const ComponentPreviews = () => {
         </ComponentPreview>
         <ComponentPreview path="/ProductDetailPage">
             <ProductDetailPage/>
+        </ComponentPreview>
+        <ComponentPreview path="/LoginPage">
+            <LoginPage/>
         </ComponentPreview>
     </Previews>
   );

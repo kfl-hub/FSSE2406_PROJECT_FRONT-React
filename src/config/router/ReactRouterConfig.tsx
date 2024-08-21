@@ -4,12 +4,15 @@ import ProductDetailPage from "../../ui/page/ProductDetailPage.tsx";
 import Layout from "../../ui/Layout.tsx";
 import ProductListingPage from "../../ui/page/ProductListingPage.tsx";
 import TestComponent from "../../TestComponent.tsx";
+import LoginPage from "../../ui/page/LoginPage.tsx";
+import ErrorPage from "../../ui/page/ErrorPage.tsx";
 
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout/>, // Use the layout component
+    errorElement: <ErrorPage/>,
     children: [
       {
         index: true, // This will be the default route
@@ -18,6 +21,14 @@ export const router = createBrowserRouter([
       {
         path: "product/:productId",
         element: <ProductDetailPage />
+      },
+      {
+        path: "login",
+        element: <LoginPage />
+      },
+      {
+        path: "error",
+        element: <ErrorPage />
       }
     ]
   }
