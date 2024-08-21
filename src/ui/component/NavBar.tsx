@@ -47,7 +47,7 @@ export default function NavBar() {
         padding: theme.spacing(0, 2),
         height: '100%',
         position: 'absolute',
-        pointerEvents: 'none',
+            pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -62,7 +62,7 @@ export default function NavBar() {
             transition: theme.transitions.create('width'),
             width: '100%',
             [theme.breakpoints.down('lg')]: {
-                width: 'auto',
+                width: '100%',
             },
         },
     }));

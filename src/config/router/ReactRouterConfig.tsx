@@ -1,21 +1,31 @@
 import {createBrowserRouter} from "react-router-dom";
-import FrontPage from "../../ui/page/FrontPage";
+
 import ProductDetailPage from "../../ui/page/ProductDetailPage.tsx";
+import Layout from "../../ui/Layout.tsx";
+import ProductListingPage from "../../ui/page/ProductListingPage.tsx";
+import TestComponent from "../../TestComponent.tsx";
+
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <FrontPage/>
-  },
-  {
-    path: "/PD",
-    element: <ProductDetailPage/>
-  },
-
+    element: <Layout/>, // Use the layout component
+    children: [
+      {
+        index: true, // This will be the default route
+        element: <ProductListingPage />
+      },
+      {
+        path: "product/:productId",
+        element: <ProductDetailPage />
+      }
+    ]
+  }
   // {
   //   path: "/product/:productId/:userId",
   //   element: <ProductDetailPage/>
   // },
+
   // {
   //   path: "/shoppingcart",
   //   element: <ShoppingCartPage/>

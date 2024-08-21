@@ -10,23 +10,23 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import CallMadeIcon from '@mui/icons-material/CallMade';
-import {ProductDto} from "../../type/Product.type.ts";
+import {GetProductDto} from "../../type/Product.type.ts";
 import {useNavigate} from "react-router-dom";
 
 type Props = {
-    productDto: ProductDto
+    productDto: GetProductDto
+    onProductClick:(productId:number)=>void
 
 }
 
 
 
-export default function ProductCard({productDto}: Props) {
-    const [expanded, setExpanded] = React.useState(false);
+export default function ProductCard({productDto,onProductClick}: Props) {
 
     const navigate = useNavigate();
 
-    const handleNavigateToProductDetail=()=>{
-        navigate("/PD")
+    const handleNavigateToProductDetail=(productId:number)=>{
+        navigate(`/product/${productId}`)
     }
 
     const truncateText = (wordLimit:number):string => {
@@ -38,15 +38,13 @@ export default function ProductCard({productDto}: Props) {
     };
     const truncatedDescription = truncateText( 17);
     console.log(truncatedDescription)
-    const handleImageClick = () => {
-        setExpanded(!expanded);
-    };
+
 
     return (
         <Card sx={{width: 350, height: 500, m: 2, border: 1, display: 'flex', flexDirection: 'column'}}>
             <CardHeader sx={{height:110,mb:-2}}
                 action={
-                    <IconButton aria-label="settings">
+                    <IconButton aria-label="go detail" onClick={()=>onProductClick(productDto.pid)}>
                         <CallMadeIcon />
                     </IconButton>
                 }
@@ -59,7 +57,7 @@ export default function ProductCard({productDto}: Props) {
                 height="230"
                 image={productDto.imageUrl}
                 alt="Product Image"
-                onClick={handleNavigateToProductDetail}
+                onClick={()=>handleNavigateToProductDetail(productDto.pid)}
 
             />
             <CardContent>

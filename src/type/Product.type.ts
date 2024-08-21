@@ -1,15 +1,11 @@
-export interface ProductDto {
+export interface GetProductDto {
     pid:         number;
     name:        string;
     description: string;
     imageUrl:    string;
     price:       number;
-    hasStock:    boolean;
-    category:    Category;
+    hasStock?:    boolean;
+    stock?: number;
+    category:    string;
 }
 
-export enum Category {
-    Accessories = "accessories",
-    MenShoes = "menShoes",
-    WomenShoes = "womenShoes",
-}

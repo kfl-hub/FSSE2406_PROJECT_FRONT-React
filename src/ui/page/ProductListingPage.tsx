@@ -1,25 +1,33 @@
-import Box from "@mui/material/Box";
+
 import ProductCard from "../component/ProductCard.tsx";
 import {useEffect, useState} from "react";
-import {ProductDto} from "../../type/Product.type.ts";
+import {GetProductDto} from "../../type/Product.type.ts";
 import {getAllProduct} from "../../api/GetProductApi.tsx";
-import {CircularProgress} from "@mui/material";
-
+import LoadingSpinner from "../component/LoadingSpinner.tsx";
+import {useNavigate} from "react-router-dom";
+import Box from "@mui/material/Box";
 
 export default function ProductListingPage() {
-    const [productDtoList, setProductDtoList] = useState<ProductDto[]>([]);
+
+    console.log("ListPage")
+    const [productDtoList, setProductDtoList] = useState<GetProductDto[]|undefined>(undefined);
+    const navigate = useNavigate();
+    const handleNavigateToProductDetail = (productId:number) => {
+        navigate(`/product/${productId}`); // Navigate to the specific product detail page
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             const responseData = await getAllProduct();
             setProductDtoList(responseData)
         }
+        console.log("ListPage2")
         fetchData();
     }, [])
 
     const renderProductCard = () => {
-        return productDtoList.map((item) => (
-            <ProductCard key={item.pid} productDto={item}/>
+        return productDtoList?.map((item) => (
+            <ProductCard key={item.pid} productDto={item} onProductClick={handleNavigateToProductDetail}/>
         ))
     };
 
@@ -32,9 +40,9 @@ export default function ProductListingPage() {
             flexWrap: "wrap",
             minHeight: '100vh'
         }}>
-            {productDtoList.length > 0
+            {productDtoList
                 ? renderProductCard() :
-                <CircularProgress size={100}/>}
+                <LoadingSpinner/>}
         </Box>
     );
 };

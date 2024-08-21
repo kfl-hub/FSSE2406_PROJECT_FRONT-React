@@ -3,9 +3,13 @@ import {Box, Button, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-function QuantitySelector() {
+type Props={
+    cartDisable:boolean
+}
+
+function QuantitySelector({cartDisable}:Props) {
 const [removeDisable,setRemoveDisable]=useState(true);
-    const [addDisable,setAddDisable]=useState(false);
+
     const [quantity, setQuantity] = useState(1);
 
     const handleIncrement = () => setQuantity((prev) => prev + 1);
@@ -35,7 +39,7 @@ useEffect(()=>{
                 inputProps={{min: 1}}
                 sx={{width: 80, textAlign: 'center', textJustify: "center"}}
             />
-            <Button onClick={handleIncrement} variant={"contained"} disabled={addDisable}>
+            <Button onClick={handleIncrement} variant={"contained"} disabled={cartDisable}>
                 <AddIcon/>
             </Button>
         </Box>

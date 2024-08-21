@@ -1,13 +1,14 @@
 import {ComponentPreview, Previews} from "@react-buddy/ide-toolbox";
 import {PaletteTree} from "./palette";
 import App from "../App.tsx";
-import ProductListingPage from "../ui/page/FrontPage";
-import FrontPage from "../ui/page/FrontPage";
+import ProductListingPage from "../ui/page/FrontPage.tsx";
+import Index from "../ui/page/FrontPage.tsx";
 import ProductCard from "../ui/component/ProductCard.tsx";
 import PrimarySearchAppBar from "../ui/component/DemoAppBar.tsx";
 import NavBar from "../ui/component/NavBar.tsx";
 import ProductInformPage from "../ui/page/ProductDetailPage.tsx";
 import QuantitySelector from "../ui/component/QuantitySelector.tsx";
+import ProductDetailPage from "../ui/page/ProductDetailPage.tsx";
 
 const ComponentPreviews = () => {
   return (
@@ -18,8 +19,8 @@ const ComponentPreviews = () => {
       <ComponentPreview path="/ProductListingPage">
         <ProductListingPage/>
       </ComponentPreview>
-        <ComponentPreview path="/FrontPage">
-            <FrontPage/>
+        <ComponentPreview path="/Index">
+            <Index/>
         </ComponentPreview>
         <ComponentPreview path="/ProductCard">
             <ProductCard/>
@@ -35,6 +36,9 @@ const ComponentPreviews = () => {
         </ComponentPreview>
         <ComponentPreview path="/QuantitySelector">
             <QuantitySelector/>
+        </ComponentPreview>
+        <ComponentPreview path="/ProductDetailPage">
+            <ProductDetailPage/>
         </ComponentPreview>
     </Previews>
   );
