@@ -1,4 +1,4 @@
-import {Dialog, DialogContent, Divider, FormControl, InputLabel, Paper, Select} from "@mui/material";
+import {Dialog, DialogContent, Divider, FormControl, InputLabel, Paper, Select, Snackbar, Tooltip} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import QuantitySelector from "../component/QuantitySelector.tsx";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -9,7 +9,7 @@ import React, {useContext, useEffect, useState} from "react";
 import ShoppingCartCheckOutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import ShareIcon from "@mui/icons-material/Share";
 import {useNavigate, useParams} from "react-router-dom";
-import {getProductById} from "../../api/GetProductApi.tsx";
+import {getProductById} from "../../api/ProductApi.ts";
 import {GetProductDto} from "../../type/Product.type.ts";
 import MenuItem from "@mui/material/MenuItem";
 import HomeButton from "../component/HomeButton.tsx";
@@ -17,14 +17,16 @@ import LoadingSpinner from "../component/LoadingSpinner.tsx";
 import Box from "@mui/material/Box";
 import {LoginUserContext} from "../../context/LoginUserContext.ts";
 import LoginPage from "./LoginPage.tsx";
+import {putCartItem} from "../../api/CartApi.ts";
 
 export default function ProductDetailPage() {
     const [productDto, setProductDto] = useState<GetProductDto | undefined>(undefined);
     const [quantity, setQuantity] = useState<number>(1);
-    const [open, setOpen] = useState(false);
-    const [sizeValue,setSizeValue]=useState<string|null>(null);
+    const [loginDialogOpen, setLoginDialogOpen] = useState(false);
+    const [addCartSnackOpen, setAddCartSnackOpen] = useState(false);
+    const [sizeValue, setSizeValue] = useState<string | null>(null);
     const {productId} = useParams<{ productId: string }>();
-    const loginUser=useContext(LoginUserContext);
+    const loginUser = useContext(LoginUserContext);
 
     const navigate = useNavigate();
     let cartDisable = false;
@@ -43,31 +45,40 @@ export default function ProductDetailPage() {
         fetchData();
     }, [productId])
 
-    const handleIncrement=()=>{
-        setQuantity((prev)=>(prev+1))
+    const handleIncrement = () => {
+        setQuantity((prev) => (prev + 1))
     }
-    const handleDecrement=()=>{
-        setQuantity((prev)=>(prev>=1?prev-1:prev))
+    const handleDecrement = () => {
+        setQuantity((prev) => (prev >= 1 ? prev - 1 : prev))
     }
-    const handleQuantityChange=(value:string)=>{
+    const handleQuantityChange = (value: string) => {
         setQuantity((Math.max(1, Number(value))))
     }
-    const handleOpenDialog = () => {
-        setOpen(true);
+    const handleOpenLoginDialog = () => {
+        setLoginDialogOpen(true);
     };
     const handleLoginSuccess = () => {
-        setOpen(false);
+        setLoginDialogOpen(false);
     };
-    const handleAddToCartOnClick=()=>{
-        loginUser?console.log("Add cart clicked"):handleOpenDialog()
+    const handleAddToCartOnClick = () => {
+        loginUser
+            ? handleAddToCartApi()
+            : handleOpenLoginDialog()
     }
-    const handleCheckOutOnClick=()=>{
-        loginUser?console.log("Check out clicked"):handleOpenDialog()
+    const handleCheckOutOnClick = () => {
+        loginUser ? console.log("Check out clicked") : handleOpenLoginDialog()
     }
+    const handleAddToCartApi=async ()=>{
+        if (await putCartItem(productDto!.pid, quantity)) {
+            setQuantity(1);
+
+        }
+    }
+
     const stockStatus = () => {
         if (productDto?.stock) {
 
-            return <img width={50} src={"/inStock.png"}/>
+            return <Tooltip title={"Stock remaining: "+productDto.stock}><img width={50} src={"/inStock.png"}/></Tooltip>
         } else {
             cartDisable = true;
             return <img width={50} src={"/soldOut.png"}/>;
@@ -89,7 +100,9 @@ export default function ProductDetailPage() {
                             labelId="demo-simple-select-standard-label"
                             id="demo-simple-select-standard"
                             value={sizeValue}
-                            onChange={(e)=>{setSizeValue(e.target.value) }}
+                            onChange={(e) => {
+                                setSizeValue(e.target.value)
+                            }}
                             label="Size"
                         >
                             <MenuItem value={8}>8</MenuItem>
@@ -122,7 +135,9 @@ export default function ProductDetailPage() {
                             labelId="w-shoe-size"
                             id="w-shoe-size"
                             value={0}
-                            onChange={(e)=>{setSizeValue(e.target.value) }}
+                            onChange={(e) => {
+                                setSizeValue(e.target.value)
+                            }}
                             label="w-shoe-size"
                         >
                             <MenuItem value={6}>6</MenuItem>
@@ -155,15 +170,20 @@ export default function ProductDetailPage() {
             flexDirection: "row",
             alignItems: 'stretch',
             justifyContent: 'center',
-            minHeight: '100vh',
+            height: '100vh',
+            width: "100%",
             pt: 4
         }}>
-            <Dialog open={open} onClose={()=>setOpen(false)} maxWidth="sm" fullWidth>
+            <Dialog open={loginDialogOpen} onClose={() => setLoginDialogOpen(false)} maxWidth="sm" fullWidth>
                 <DialogContent>
-                    <LoginPage onLoginSuccess={handleLoginSuccess} />
+                    <LoginPage onLoginSuccess={handleLoginSuccess}/>
                 </DialogContent>
             </Dialog>
-
+            <Snackbar
+                open={addCartSnackOpen}
+                autoHideDuration={6000}
+                message={"Note archived"}
+            />
             <Box width={"50%"} sx={{ //left part
                 backgroundColor: 'transparent',
                 display: 'flex',
@@ -224,7 +244,8 @@ export default function ProductDetailPage() {
                              sx={{
                                  display: 'flex',
                                  flexDirection: "column",
-                                 justifyContent: "center",
+                                 justifyItems: "center",
+                                 alignItems: "start",
                                  width: 220,
                                  mb: 2,
                                  mt: 2
@@ -237,7 +258,9 @@ export default function ProductDetailPage() {
                                               handleDecrement={handleDecrement}
                                               handleQuantityChange={handleQuantityChange}/>
 
-                            <Button onClick={handleAddToCartOnClick} sx={{mt: 2}} variant="contained" disabled={cartDisable}
+                            <Button onClick={handleAddToCartOnClick} sx={{mt: 2, fontSize: "1rem"}}
+                                    variant="contained"
+                                    disabled={cartDisable}
                                     endIcon={<AddShoppingCartIcon/>}>
                                 Add to Cart
                             </Button>
@@ -272,7 +295,8 @@ export default function ProductDetailPage() {
                             </IconButton>
                         </Box>
 
-                        <Button onClick={handleCheckOutOnClick} variant={"contained"} size={"large"} sx={{fontSize: "1.3rem"}}
+                        <Button onClick={handleCheckOutOnClick} variant={"contained"} size={"large"}
+                                sx={{fontSize: "1.3rem"}}
                                 endIcon={<ShoppingCartCheckOutIcon/>}>
                             Check out
                         </Button>

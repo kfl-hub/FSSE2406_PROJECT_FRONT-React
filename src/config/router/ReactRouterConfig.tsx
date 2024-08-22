@@ -6,6 +6,7 @@ import ProductListingPage from "../../ui/page/ProductListingPage.tsx";
 import TestComponent from "../../TestComponent.tsx";
 import LoginPage from "../../ui/page/LoginPage.tsx";
 import ErrorPage from "../../ui/page/ErrorPage.tsx";
+import CartPage from "../../ui/page/CartPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -22,21 +23,20 @@ export const router = createBrowserRouter([
         path: "product/:productId",
         element: <ProductDetailPage />
       },
-      {
-        path: "login",
-        element: <LoginPage />
-      },
+      // {
+      //   path: "login",
+      //   element: <LoginPage />
+      // },
       {
         path: "error",
         element: <ErrorPage />
-      }
+      },
+      {
+        path: "/cart",
+        element: <CartPage/>
+      },
     ]
   }
-  // {
-  //   path: "/product/:productId/:userId",
-  //   element: <ProductDetailPage/>
-  // },
-
   // {
   //   path: "/shoppingcart",
   //   element: <ShoppingCartPage/>

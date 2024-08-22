@@ -19,8 +19,8 @@ export default function Layout() {
                 height: '100%',
             }}>
                 <NavBar />
-                <Box sx={{
-                    // flex: 1, // This ensures the Outlet takes up the remaining space
+                <Box
+                    sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',

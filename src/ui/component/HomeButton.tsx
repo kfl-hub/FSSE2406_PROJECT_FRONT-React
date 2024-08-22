@@ -13,7 +13,7 @@ export default function HomeButton() {
     return (
         <Button color="primary" variant={"contained"} sx={{mt: 2, fontSize: "1rem"}}
                 onClick={handleNavigateToFront}
-        endIcon={<HomeIcon fontSize={"medium"}/>}>
+        endIcon={<HomeIcon fontSize={"inherit"}/>}>
            Go to Home
         </Button>)
 

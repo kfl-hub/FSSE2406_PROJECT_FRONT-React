@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import {Box, Button, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import IconButton from "@mui/material/IconButton";
 
 type Props={
     cartDisable:boolean,
@@ -21,16 +22,19 @@ useEffect(():void=>{
 },[quantity])
     return (
         <Box
+            border={"solid"}
+            borderRadius={2}
             sx={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 1,
-                width: 220,
+                justifyContent:"center",
+                gap: 0,
+                width: 120,
             }}
         >
-            <Button onClick={handleDecrement} variant={"contained"} disabled={removeDisable}>
-                <RemoveIcon/>
-            </Button>
+            <IconButton sx={{fontSize:20}} color={"inherit"} onClick={handleDecrement} disabled={removeDisable}>
+                <RemoveIcon fontSize={"inherit"}/>
+            </IconButton>
             <TextField
                 value={quantity}
                 variant={"standard"}
@@ -38,9 +42,9 @@ useEffect(():void=>{
                 inputProps={{min: 1,style: { textAlign: 'center' }}}
                 sx={{width: 50}}
             />
-            <Button onClick={handleIncrement} variant={"contained"} disabled={cartDisable}>
-                <AddIcon/>
-            </Button>
+            <IconButton sx={{fontSize:20}} color={"inherit"} onClick={handleIncrement}  disabled={cartDisable}>
+                <AddIcon fontSize={"inherit"}/>
+            </IconButton>
         </Box>
     );
 }

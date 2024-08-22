@@ -2,7 +2,7 @@
 import ProductCard from "../component/ProductCard.tsx";
 import {useEffect, useState} from "react";
 import {GetProductDto} from "../../type/Product.type.ts";
-import {getAllProduct} from "../../api/GetProductApi.tsx";
+import {getAllProduct} from "../../api/ProductApi.ts";
 import LoadingSpinner from "../component/LoadingSpinner.tsx";
 import {useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
