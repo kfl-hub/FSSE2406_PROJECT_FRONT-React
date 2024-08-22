@@ -1,4 +1,15 @@
-import {Dialog, DialogContent, Divider, FormControl, InputLabel, Paper, Select, Snackbar, Tooltip} from "@mui/material";
+import {
+    Alert,
+    Dialog,
+    DialogContent,
+    Divider,
+    FormControl,
+    InputLabel,
+    Paper,
+    Select,
+    Snackbar,
+    Tooltip
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import QuantitySelector from "../component/QuantitySelector.tsx";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -22,9 +33,9 @@ import {putCartItem} from "../../api/CartApi.ts";
 export default function ProductDetailPage() {
     const [productDto, setProductDto] = useState<GetProductDto | undefined>(undefined);
     const [quantity, setQuantity] = useState<number>(1);
+    const [sizeValue, setSizeValue] = useState<string | null>(null);
     const [loginDialogOpen, setLoginDialogOpen] = useState(false);
     const [addCartSnackOpen, setAddCartSnackOpen] = useState(false);
-    const [sizeValue, setSizeValue] = useState<string | null>(null);
     const {productId} = useParams<{ productId: string }>();
     const loginUser = useContext(LoginUserContext);
 
@@ -43,16 +54,24 @@ export default function ProductDetailPage() {
         }
 
         fetchData();
-    }, [productId])
+    }, [quantity])
 
     const handleIncrement = () => {
-        setQuantity((prev) => (prev + 1))
+        if (quantity<productDto?.stock){
+            setQuantity((prev) => (prev + 1))
+        }
     }
     const handleDecrement = () => {
         setQuantity((prev) => (prev >= 1 ? prev - 1 : prev))
     }
-    const handleQuantityChange = (value: string) => {
-        setQuantity((Math.max(1, Number(value))))
+    const handleQuantityOnChange = (value: string) => {
+        const newValue = Math.min(productDto?.stock, Number(value));
+
+        if (newValue <= 0) {
+            setQuantity(1);
+        } else {
+            setQuantity(newValue);
+        }
     }
     const handleOpenLoginDialog = () => {
         setLoginDialogOpen(true);
@@ -61,24 +80,30 @@ export default function ProductDetailPage() {
         setLoginDialogOpen(false);
     };
     const handleAddToCartOnClick = () => {
-        loginUser
-            ? handleAddToCartApi()
-            : handleOpenLoginDialog()
+        !loginUser
+            ?handleOpenLoginDialog()
+            :handleAddToCartApi()
+
     }
     const handleCheckOutOnClick = () => {
-        loginUser ? console.log("Check out clicked") : handleOpenLoginDialog()
+        !loginUser
+            ? handleOpenLoginDialog()
+            :handleNavigateToCartPage()
     }
-    const handleAddToCartApi=async ()=>{
-        if (await putCartItem(productDto!.pid, quantity)) {
+    const handleNavigateToCartPage = () => {
+        navigate("/cart")
+    }
+    const handleAddToCartApi = async () => {
+        if (await putCartItem(productDto!.pid, quantity, sizeValue)) {
             setQuantity(1);
-
+            setAddCartSnackOpen(true);
         }
     }
 
     const stockStatus = () => {
         if (productDto?.stock) {
-
-            return <Tooltip title={"Stock remaining: "+productDto.stock}><img width={50} src={"/inStock.png"}/></Tooltip>
+            return <Tooltip title={"Stock remaining: " + productDto.stock}><img width={50}
+                                                                                src={"/inStock.png"}/></Tooltip>
         } else {
             cartDisable = true;
             return <img width={50} src={"/soldOut.png"}/>;
@@ -164,159 +189,155 @@ export default function ProductDetailPage() {
 
     return productDto ? (
 
-        <Box sx={{ //inner container
-            backgroundColor: 'rgba(0, 0, 0, 0.3)',
-            display: 'flex',
-            flexDirection: "row",
-            alignItems: 'stretch',
-            justifyContent: 'center',
-            height: '100vh',
-            width: "100%",
-            pt: 4
-        }}>
-            <Dialog open={loginDialogOpen} onClose={() => setLoginDialogOpen(false)} maxWidth="sm" fullWidth>
-                <DialogContent>
-                    <LoginPage onLoginSuccess={handleLoginSuccess}/>
-                </DialogContent>
-            </Dialog>
-            <Snackbar
-                open={addCartSnackOpen}
-                autoHideDuration={6000}
-                message={"Note archived"}
-            />
-            <Box width={"50%"} sx={{ //left part
-                backgroundColor: 'transparent',
+            <Box sx={{ //inner container
+                backgroundColor: 'rgba(0, 0, 0, 0.3)',
                 display: 'flex',
-                flexDirection: "column",
-                alignItems: 'center',
-                justifyContent: 'stretch',
-                minHeight: '100vh'
+                flexDirection: "row",
+                alignItems: 'stretch',
+                justifyContent: 'center',
+                height: '100vh',
+                width: "100%",
+                pt: 4
             }}>
-                <Paper variant="outlined"
-                       sx={{width: 700, backgroundColor: 'rgba(255, 255, 255, 0.85)'}}>
-                    <img width="100%" src={productDto?.imageUrl}/>
-                </Paper>
-                <Paper variant="outlined"
-                       sx={{width: 100, m: 2, backgroundColor: 'rgba(255, 255, 255, 0.85)'}}>
-                    <img width="100%" src={productDto?.imageUrl}/>
+                <Dialog open={loginDialogOpen} onClose={() => setLoginDialogOpen(false)} maxWidth="sm" fullWidth>
+                    <DialogContent>
+                        <LoginPage onLoginSuccess={handleLoginSuccess}/>
+                    </DialogContent>
+                </Dialog>
+                <Snackbar open={addCartSnackOpen} autoHideDuration={10000}
+                          onClose={() => setAddCartSnackOpen(false)}
+                          anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
+                    <Alert
+                        severity="success"
+                        variant="filled"
+                        sx={{width: '100%'}}
+                    >{productDto.name + " quantity: " + quantity + " is added to cart."}
+                    </Alert>
+                </Snackbar>
+                <Box width={"50%"} sx={{ //left part
+                    backgroundColor: 'transparent',
+                    display: 'flex',
+                    flexDirection: "column",
+                    alignItems: 'center',
+                    justifyContent: 'stretch',
+                    minHeight: '100vh'
+                }}>
+                    <Paper variant="outlined"
+                           sx={{width: 700, backgroundColor: 'rgba(255, 255, 255, 0.85)'}}>
+                        <img width="100%" src={productDto?.imageUrl}/>
+                    </Paper>
+                    <Paper variant="outlined"
+                           sx={{width: 100, m: 2, backgroundColor: 'rgba(255, 255, 255, 0.85)'}}>
+                        <img width="100%" src={productDto?.imageUrl}/>
 
-                </Paper>
-            </Box>
-            <Box width={"50%"} sx={{ //right part
-                backgroundColor: "transparent",
-                display: 'flex',
-                flexDirection: "column",
-                alignItems: 'center',
-                justifyContent: 'stretch',
-                minHeight: '100vh'
-            }}>
-                <Paper variant="outlined"
-                       sx={{
-                           width: "90%",
-                           height: "90%",
-                           pl: 2,
-                           pr: 1,
-                           backgroundColor: 'rgba(255, 255, 255, 0.85)',
-                       }}>
-                    <Typography sx={{fontWeight: 'Light', mb: 3}} variant={"h2"}>{productDto?.name}</Typography>
-                    <Box sx={{
-                        display: 'flex',
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: 'space-between',
-                        color: "#454545",
-                        mr: 12,
-                        mb: 2
-                    }}>
-                        <Typography sx={{fontWeight: '500'}} variant={"h5"}>${productDto?.price}.0</Typography>
-                        <Typography sx={{fontWeight: '500'}} variant={"h5"}>
-                            {stockStatus()}
+                    </Paper>
+                </Box>
+                <Box width={"50%"} sx={{ //right part
+                    backgroundColor: "transparent",
+                    display: 'flex',
+                    flexDirection: "column",
+                    alignItems: 'center',
+                    justifyContent: 'stretch',
+                    minHeight: '100vh'
+                }}>
+                    <Paper variant="outlined"
+                           sx={{
+                               width: "90%",
+                               height: "90%",
+                               pl: 2,
+                               pr: 1,
+                               backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                           }}>
+                        <Typography sx={{fontWeight: 'Light', mb: 3}} variant={"h2"}>{productDto?.name}</Typography>
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: 'space-between',
+                            color: "#454545",
+                            mr: 12,
+                            mb: 2
+                        }}>
+                            <Typography sx={{fontWeight: '500'}} variant={"h5"}>${productDto?.price}.0</Typography>
+                            <Typography sx={{fontWeight: '500'}} variant={"h5"}>
+                                {stockStatus()}
+                            </Typography>
+                        </Box>
+
+                        <Divider variant="middle"/>
+                        <Box aria-label={"CartAndSizeBox"}
+                             display={"flex"}
+                             flexDirection={"row"}
+                             justifyItems={"start"}>
+
+                            <Box aria-label={"CartBox"}
+                                 sx={{
+                                     display: 'flex',
+                                     flexDirection: "column",
+                                     justifyItems: "center",
+                                     alignItems: "start",
+                                     width: 220,
+                                     mb: 2,
+                                     mt: 2
+                                 }}>
+                                <Typography sx={{fontWeight: '500', mb: 2}} variant={"h6"}>Qty</Typography>
+
+                                <QuantitySelector cartDisable={cartDisable}
+                                                  quantity={quantity}
+                                                  handleIncrement={handleIncrement}
+                                                  handleDecrement={handleDecrement}
+                                                  handleQuantityChange={handleQuantityOnChange}/>
+
+                                <Button onClick={handleAddToCartOnClick} sx={{mt: 2, fontSize: "1rem"}}
+                                        variant="contained"
+                                        disabled={cartDisable}
+                                        endIcon={<AddShoppingCartIcon/>}>
+                                    Add to Cart
+                                </Button>
+                            </Box>
+                            <Box aria-label={"SizeBox"} width={"100%"}>
+                                {sizeList()}
+                            </Box>
+                        </Box>
+                        <Typography variant={"subtitle1"} sx={{mt: 4, mb: 4, pr: 20, color: "#454545"}}>
+                            {productDto?.description}
                         </Typography>
-                    </Box>
+                        <Box sx={{
+                            display: 'flex',
+                            flexDirection: "row",
+                            justifyContent: 'space-between',
+                            color: "#454545",
+                            mr: 2,
+                            mb: 2
+                        }}>
+                            <Box>
+                                <IconButton sx={{borderRadius: 10}}>
+                                    <FavoriteIcon/>
+                                    <Typography variant="button" sx={{fontSize: '0.75rem', mt: 0.5}}>
+                                        Add to favorites
+                                    </Typography>
+                                </IconButton>
+                                <IconButton sx={{borderRadius: 10}}>
+                                    <ShareIcon/>
+                                    <Typography variant="button" sx={{fontSize: '0.75rem', mt: 0.5}}>
+                                        Share
+                                    </Typography>
+                                </IconButton>
+                            </Box>
 
-                    <Divider variant="middle"/>
-                    <Box aria-label={"CartAndSizeBox"}
-                         display={"flex"}
-                         flexDirection={"row"}
-                         justifyItems={"start"}>
-
-                        <Box aria-label={"CartBox"}
-                             sx={{
-                                 display: 'flex',
-                                 flexDirection: "column",
-                                 justifyItems: "center",
-                                 alignItems: "start",
-                                 width: 220,
-                                 mb: 2,
-                                 mt: 2
-                             }}>
-                            <Typography sx={{fontWeight: '500', mb: 2}} variant={"h6"}>Qty</Typography>
-
-                            <QuantitySelector cartDisable={cartDisable}
-                                              quantity={quantity}
-                                              handleIncrement={handleIncrement}
-                                              handleDecrement={handleDecrement}
-                                              handleQuantityChange={handleQuantityChange}/>
-
-                            <Button onClick={handleAddToCartOnClick} sx={{mt: 2, fontSize: "1rem"}}
-                                    variant="contained"
-                                    disabled={cartDisable}
-                                    endIcon={<AddShoppingCartIcon/>}>
-                                Add to Cart
+                            <Button onClick={handleCheckOutOnClick} variant={"contained"} size={"large"}
+                                    sx={{fontSize: "1.3rem"}}
+                                    endIcon={<ShoppingCartCheckOutIcon/>}>
+                                Check out
                             </Button>
-                        </Box>
-                        <Box aria-label={"SizeBox"} width={"100%"}>
-                            {sizeList()}
-                        </Box>
-                    </Box>
-                    <Typography variant={"subtitle1"} sx={{mt: 4, mb: 4, pr: 20, color: "#454545"}}>
-                        {productDto?.description}
-                    </Typography>
-                    <Box sx={{
-                        display: 'flex',
-                        flexDirection: "row",
-                        justifyContent: 'space-between',
-                        color: "#454545",
-                        mr: 2,
-                        mb: 2
-                    }}>
-                        <Box>
-                            <IconButton sx={{borderRadius: 10}}>
-                                <FavoriteIcon/>
-                                <Typography variant="button" sx={{fontSize: '0.75rem', mt: 0.5}}>
-                                    Add to favorites
-                                </Typography>
-                            </IconButton>
-                            <IconButton sx={{borderRadius: 10}}>
-                                <ShareIcon/>
-                                <Typography variant="button" sx={{fontSize: '0.75rem', mt: 0.5}}>
-                                    Share
-                                </Typography>
-                            </IconButton>
-                        </Box>
 
-                        <Button onClick={handleCheckOutOnClick} variant={"contained"} size={"large"}
-                                sx={{fontSize: "1.3rem"}}
-                                endIcon={<ShoppingCartCheckOutIcon/>}>
-                            Check out
-                        </Button>
-
-                    </Box>
-                    <Divider variant="middle"/>
-                    <HomeButton/>
-                </Paper>
+                        </Box>
+                        <Divider variant="middle"/>
+                        <HomeButton/>
+                    </Paper>
+                </Box>
             </Box>
-        </Box>
-    ) : <Box sx={{ //Spinner container
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
-        display: 'flex',
-        flexDirection: "row",
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        minWidth: '100%',
-        pt: 4
-    }}>
+        ) :
         <LoadingSpinner/>
-    </Box>;
+        ;
 };

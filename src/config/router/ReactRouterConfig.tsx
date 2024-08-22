@@ -23,10 +23,6 @@ export const router = createBrowserRouter([
         path: "product/:productId",
         element: <ProductDetailPage />
       },
-      // {
-      //   path: "login",
-      //   element: <LoginPage />
-      // },
       {
         path: "error",
         element: <ErrorPage />
@@ -37,14 +33,6 @@ export const router = createBrowserRouter([
       },
     ]
   }
-  // {
-  //   path: "/shoppingcart",
-  //   element: <ShoppingCartPage/>
-  // },
-  // {
-  //   path: "/login",
-  //   element: <LoginPage/>
-  // },
   // {
   //   path: "/checkout/:transactionId",
   //   element: <CheckoutPage/>

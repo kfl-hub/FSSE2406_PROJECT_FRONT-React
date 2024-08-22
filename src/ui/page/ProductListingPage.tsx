@@ -9,7 +9,6 @@ import Box from "@mui/material/Box";
 
 export default function ProductListingPage() {
 
-    console.log("ListPage")
     const [productDtoList, setProductDtoList] = useState<GetProductDto[]|undefined>(undefined);
     const navigate = useNavigate();
     const handleNavigateToProductDetail = (productId:number) => {
@@ -21,7 +20,7 @@ export default function ProductListingPage() {
             const responseData = await getAllProduct();
             setProductDtoList(responseData)
         }
-        console.log("ListPage2")
+
         fetchData();
     }, [])
 

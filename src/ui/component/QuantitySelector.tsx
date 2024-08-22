@@ -22,14 +22,14 @@ useEffect(():void=>{
 },[quantity])
     return (
         <Box
-            border={"solid"}
+            border={2}
             borderRadius={2}
             sx={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent:"center",
                 gap: 0,
-                width: 120,
+                width: 128,
             }}
         >
             <IconButton sx={{fontSize:20}} color={"inherit"} onClick={handleDecrement} disabled={removeDisable}>
@@ -37,10 +37,10 @@ useEffect(():void=>{
             </IconButton>
             <TextField
                 value={quantity}
-                variant={"standard"}
+                variant={"outlined"}
                 onChange={(e) => (handleQuantityChange(e.target.value))}
                 inputProps={{min: 1,style: { textAlign: 'center' }}}
-                sx={{width: 50}}
+                sx={{borderLeft:2,borderRight:2,"& fieldset": { border: 'none' }}}
             />
             <IconButton sx={{fontSize:20}} color={"inherit"} onClick={handleIncrement}  disabled={cartDisable}>
                 <AddIcon fontSize={"inherit"}/>

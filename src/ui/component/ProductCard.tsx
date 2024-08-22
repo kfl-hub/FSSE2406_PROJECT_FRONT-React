@@ -38,8 +38,6 @@ export default function ProductCard({productDto,onProductClick}: Props) {
         return productDto.description;
     };
     const truncatedDescription = truncateText( 17);
-    console.log(truncatedDescription)
-
 
     return (
         <Card sx={{width: 350, height: 500,

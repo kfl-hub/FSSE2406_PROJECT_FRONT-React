@@ -1,17 +1,16 @@
 
 import * as FirebaseAuthService from "../authService/FIrebaseAuthService.ts"
 import axios from "axios";
-import {PutCartDto} from "../type/Cart.type.ts";
+import {CartItemDto, PutCartDto} from "../type/Cart.type.ts";
 
 const baseUrl:string="http://localhost:8080"
 
 const getAuthConfig=async ()  =>{
     const accessToken = await FirebaseAuthService.getAccessToken();
     if (!accessToken) {
+        console.error("**getAccessToken**")
         throw new Error()
-        console.error("getAccessTokengetAccessTokengetAccessTokengetAccessTokengetAccessTokengetAccessTokengetAccessTokengetAccessToken")
     }
-    console.log(accessToken)
     return{
         headers:{
             Authorization:`Bearer ${accessToken}`
@@ -19,9 +18,9 @@ const getAuthConfig=async ()  =>{
     }
 }
 
-export const putCartItem= async (pid:number,quantity:number)=>{
+export const putCartItem= async (pid:number,quantity:number,sizeValue:string|number)=>{
 try{
-    const response= await axios.put<PutCartDto>(`${baseUrl}/cart/${pid}/${quantity}`
+    const response= await axios.put<PutCartDto>(`${baseUrl}/cart/${pid}/${quantity}/${sizeValue}`
         ,null
     ,await getAuthConfig()
 )
@@ -29,4 +28,14 @@ return response.data;
 }catch (err){
     console.error(err)
 }
+}
+
+export const getCartItem=async ()=>{
+    try {
+        const response= await axios.get<CartItemDto[]>(`${baseUrl}/cart`
+            ,await getAuthConfig())
+        return response.data;
+    }catch (err){
+        console.error(err)
+    }
 }

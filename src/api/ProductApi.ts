@@ -1,6 +1,4 @@
 import axios from "axios";
-import {GetProductDto} from "../type/Product.type.ts";
-
 const baseUrl:string="http://localhost:8080"
 
 export const getAllProduct=async ()=>{
