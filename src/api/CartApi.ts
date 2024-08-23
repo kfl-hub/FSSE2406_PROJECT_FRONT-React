@@ -39,3 +39,14 @@ export const getCartItem=async ()=>{
         console.error(err)
     }
 }
+export const deleteCartItem = async (cid: number) => {
+    try {
+        const response = await axios.delete<PutCartDto>(
+            `${baseUrl}/cart/${cid}`,
+            await getAuthConfig()
+        );
+        return response.data;
+    } catch (err) {
+        console.error(err);
+    }
+};

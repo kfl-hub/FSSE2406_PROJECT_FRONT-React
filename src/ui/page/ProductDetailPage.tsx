@@ -16,7 +16,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import React, {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import ShoppingCartCheckOutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import ShareIcon from "@mui/icons-material/Share";
 import {useNavigate, useParams} from "react-router-dom";
@@ -29,13 +29,15 @@ import Box from "@mui/material/Box";
 import {LoginUserContext} from "../../context/LoginUserContext.ts";
 import LoginPage from "./LoginPage.tsx";
 import {putCartItem} from "../../api/CartApi.ts";
+import ShoeSizeSelectorDemo from "../component/ShoeSizeSelectorDemo.tsx";
 
 export default function ProductDetailPage() {
     const [productDto, setProductDto] = useState<GetProductDto | undefined>(undefined);
     const [quantity, setQuantity] = useState<number>(1);
-    const [sizeValue, setSizeValue] = useState<string | null>(null);
+    const [sizeValue, setSizeValue] = useState<string>('');
     const [loginDialogOpen, setLoginDialogOpen] = useState(false);
     const [addCartSnackOpen, setAddCartSnackOpen] = useState(false);
+    const [sizeAlertSnackOpen, setSizeAlertOPen] = useState(false);
     const {productId} = useParams<{ productId: string }>();
     const loginUser = useContext(LoginUserContext);
 
@@ -47,6 +49,7 @@ export default function ProductDetailPage() {
             try {
                 const responseData = await (getProductById(Number(productId)));
                 setProductDto(responseData);
+
             } catch (err) {
                 console.error(err)
                 navigate("error")
@@ -57,21 +60,25 @@ export default function ProductDetailPage() {
     }, [quantity])
 
     const handleIncrement = () => {
-        if (quantity<productDto?.stock){
+        if (quantity < productDto?.stock) {
             setQuantity((prev) => (prev + 1))
         }
     }
     const handleDecrement = () => {
         setQuantity((prev) => (prev >= 1 ? prev - 1 : prev))
     }
-    const handleQuantityOnChange = (value: string) => {
-        const newValue = Math.min(productDto?.stock, Number(value));
+    const handleQuantityOnChange = (value: string ) => {
+            const newValue = Math.min(productDto.stock, Number(value));
 
         if (newValue <= 0) {
             setQuantity(1);
         } else {
             setQuantity(newValue);
         }
+    }
+
+    const handleOnSizeValueChange = (sizeValue:string) => {
+        setSizeValue(sizeValue);
     }
     const handleOpenLoginDialog = () => {
         setLoginDialogOpen(true);
@@ -80,15 +87,24 @@ export default function ProductDetailPage() {
         setLoginDialogOpen(false);
     };
     const handleAddToCartOnClick = () => {
-        !loginUser
-            ?handleOpenLoginDialog()
-            :handleAddToCartApi()
+        if (!loginUser) {
+            handleOpenLoginDialog()
+            return;
+        }
+        if (productDto?.category.includes("Shoe") && !sizeValue) {
+            setSizeAlertOPen(true);
+        } else {
+            console.log(productDto?.category)
+            handleAddToCartApi()
+
+        }
+
 
     }
     const handleCheckOutOnClick = () => {
         !loginUser
             ? handleOpenLoginDialog()
-            :handleNavigateToCartPage()
+            : handleNavigateToCartPage()
     }
     const handleNavigateToCartPage = () => {
         navigate("/cart")
@@ -112,30 +128,14 @@ export default function ProductDetailPage() {
 
     const sizeList = () => {
         if (productDto?.category === "menShoes") {
+            console.log("page size "+sizeValue);
             return (
                 <Box
                     display={"flex"}
                     flexDirection={"column"}
                     alignItems={"center"}
                     width={300}>
-                    <Typography sx={{fontWeight: '500', mt: 2}} variant="h6">Men Running Shoe</Typography>
-                    <FormControl variant="standard" sx={{m: 2, minWidth: 160}}>
-                        <InputLabel id="demo-simple-select-standard-label">Select size</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-standard-label"
-                            id="demo-simple-select-standard"
-                            value={sizeValue}
-                            onChange={(e) => {
-                                setSizeValue(e.target.value)
-                            }}
-                            label="Size"
-                        >
-                            <MenuItem value={8}>8</MenuItem>
-                            <MenuItem value={9.5}>9.5</MenuItem>
-                            <MenuItem value={10}>10</MenuItem>
-                            <MenuItem value={15}>15</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <ShoeSizeSelectorDemo category={productDto.category} value={sizeValue} handleOnSizeValueChange={handleOnSizeValueChange}/>
                     <Button
                         variant="text"
                         sx={{color: 'gray', padding: '10px 20px', borderRadius: '8px', mt: 0}}
@@ -153,14 +153,17 @@ export default function ProductDetailPage() {
                     flexDirection={"column"}
                     alignItems={"center"}
                     width={300}>
+
+
                     <Typography sx={{fontWeight: '500', mt: 2}} variant="h6">Women Running Shoe</Typography>
                     <FormControl variant="standard" sx={{m: 2, minWidth: 160}}>
                         <InputLabel id="w-shoe-size">Select size</InputLabel>
                         <Select
                             labelId="w-shoe-size"
                             id="w-shoe-size"
-                            value={0}
+                            value={sizeValue}
                             onChange={(e) => {
+                                console.log("size "+sizeValue)
                                 setSizeValue(e.target.value)
                             }}
                             label="w-shoe-size"
@@ -171,6 +174,8 @@ export default function ProductDetailPage() {
                             <MenuItem value={12}>12</MenuItem>
                         </Select>
                     </FormControl>
+
+
                     <Button
                         variant="text"
                         sx={{color: 'gray', padding: '10px 20px', borderRadius: '8px', mt: 0}}
@@ -212,6 +217,16 @@ export default function ProductDetailPage() {
                         variant="filled"
                         sx={{width: '100%'}}
                     >{productDto.name + " quantity: " + quantity + " is added to cart."}
+                    </Alert>
+                </Snackbar>
+                <Snackbar open={sizeAlertSnackOpen} autoHideDuration={3000}
+                          onClose={() => setSizeAlertOPen(false)}
+                          anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
+                    <Alert
+                        severity="error"
+                        variant="filled"
+                        sx={{width: '100%'}}
+                    >Please select size.
                     </Alert>
                 </Snackbar>
                 <Box width={"50%"} sx={{ //left part
@@ -307,7 +322,7 @@ export default function ProductDetailPage() {
                             flexDirection: "row",
                             justifyContent: 'space-between',
                             color: "#454545",
-                            mr: 2,
+                            mr: 12,
                             mb: 2
                         }}>
                             <Box>
