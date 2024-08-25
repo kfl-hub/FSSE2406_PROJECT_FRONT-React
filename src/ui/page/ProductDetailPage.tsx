@@ -148,44 +148,22 @@ export default function ProductDetailPage() {
                 </Box>);
         } else if (productDto?.category === "womenShoes") {
             return (
-                <Box
-                    display={"flex"}
-                    flexDirection={"column"}
-                    alignItems={"center"}
-                    width={300}>
-
-
-                    <Typography sx={{fontWeight: '500', mt: 2}} variant="h6">Women Running Shoe</Typography>
-                    <FormControl variant="standard" sx={{m: 2, minWidth: 160}}>
-                        <InputLabel id="w-shoe-size">Select size</InputLabel>
-                        <Select
-                            labelId="w-shoe-size"
-                            id="w-shoe-size"
-                            value={sizeValue}
-                            onChange={(e) => {
-                                console.log("size "+sizeValue)
-                                setSizeValue(e.target.value)
-                            }}
-                            label="w-shoe-size"
-                        >
-                            <MenuItem value={6}>6</MenuItem>
-                            <MenuItem value={8.5}>8.5</MenuItem>
-                            <MenuItem value={10}>10</MenuItem>
-                            <MenuItem value={12}>12</MenuItem>
-                        </Select>
-                    </FormControl>
-
-
-                    <Button
-                        variant="text"
-                        sx={{color: 'gray', padding: '10px 20px', borderRadius: '8px', mt: 0}}
-                        href="https://images.template.net/112082/women-s-uk-to-us-shoe-size-chart-edit-online.jpg"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        View Shoe Size Chart
-                    </Button>
-                </Box>);
+              <Box
+                display={"flex"}
+                flexDirection={"column"}
+                alignItems={"center"}
+                width={300}>
+                  <ShoeSizeSelectorDemo category={productDto.category} value={sizeValue} handleOnSizeValueChange={handleOnSizeValueChange}/>
+                  <Button
+                    variant="text"
+                    sx={{color: 'gray', padding: '10px 20px', borderRadius: '8px', mt: 0}}
+                    href="https://images.template.net/112098/free-men-s-shoe-size-chart-edit-online.jpg"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                      View Shoe Size Chart
+                  </Button>
+              </Box>);
         } else {
             return <></>;
         }

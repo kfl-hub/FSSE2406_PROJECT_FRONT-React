@@ -11,4 +11,5 @@ export interface CartItemDto {
     cartQuantity: number;
     stock: number;
     size?: string;
+    category:string;
 }

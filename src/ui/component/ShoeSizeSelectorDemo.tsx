@@ -35,12 +35,10 @@ export default function ShoeSizeSelectorDemo({category, value,handleOnSizeValueC
                        return <MenuItem value={menSize}>{menSize}</MenuItem>
                     }))
                     : category === "womenShoes"
-                        ? (<>
-                            <MenuItem value={6}>6</MenuItem>
-                                <MenuItem value={8.5}>8.5</MenuItem>
-                                <MenuItem value={10}>10</MenuItem>
-                                <MenuItem value={12}>12</MenuItem>
-                        </>)
+                        ? (Array.from({length:6}).map((_,index)=>{
+                      const menSize = 8 + index * 0.5;
+                      return <MenuItem value={menSize}>{menSize}</MenuItem>
+                    }))
                         : <></>
                    }
             </Select>
