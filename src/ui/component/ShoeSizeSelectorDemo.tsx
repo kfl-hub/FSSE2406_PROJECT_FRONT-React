@@ -1,7 +1,6 @@
 import Typography from "@mui/material/Typography";
 import {FormControl, InputLabel, Select} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 
 type Props = {
     category: string,
@@ -32,12 +31,12 @@ export default function ShoeSizeSelectorDemo({category, value,handleOnSizeValueC
                 {category === "menShoes"
                     ? (Array.from({length:9}).map((_,index)=>{
                         const menSize = 8 + index * 0.5;
-                       return <MenuItem value={menSize}>{menSize}</MenuItem>
+                       return <MenuItem key={menSize} value={menSize}>{menSize}</MenuItem>
                     }))
                     : category === "womenShoes"
                         ? (Array.from({length:6}).map((_,index)=>{
-                      const menSize = 8 + index * 0.5;
-                      return <MenuItem value={menSize}>{menSize}</MenuItem>
+                      const womenSize = 8 + index * 0.5;
+                      return <MenuItem key={womenSize} value={womenSize}>{womenSize}</MenuItem>
                     }))
                         : <></>
                    }

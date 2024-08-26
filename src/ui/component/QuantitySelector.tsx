@@ -9,10 +9,11 @@ type Props={
     quantity:number,
     handleIncrement:()=>void,
     handleDecrement:()=>void,
-    handleQuantityChange:(value:string)=>void
+    handleQuantityChange:(value:string)=>void,
+    handleUpdateItem?:()=>void,
 }
 
-function QuantitySelector({cartDisable,quantity,handleDecrement,handleIncrement,handleQuantityChange}:Props) {
+function QuantitySelector({cartDisable,quantity,handleDecrement,handleIncrement,handleQuantityChange,handleUpdateItem}:Props) {
 const [removeDisable,setRemoveDisable]=useState(true);
 
 useEffect(():void=>{

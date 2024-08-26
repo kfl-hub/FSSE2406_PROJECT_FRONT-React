@@ -321,7 +321,7 @@ export default function ProductDetailPage() {
                             <Button onClick={handleCheckOutOnClick} variant={"contained"} size={"large"}
                                     sx={{fontSize: "1.3rem"}}
                                     endIcon={<ShoppingCartCheckOutIcon/>}>
-                                Check out
+                                Go to Cart
                             </Button>
 
                         </Box>
