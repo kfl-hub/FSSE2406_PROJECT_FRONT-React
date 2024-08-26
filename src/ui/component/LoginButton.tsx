@@ -20,7 +20,7 @@ export default function LoginButton() {
 
     return (
         <>
-        <Button sx={{width: 200}}
+        <Button sx={{width: 200,bgcolor:"black"}}
                 size={"large"}
                 color="inherit"
                 endIcon={<><FacebookIcon sx={{mr: 1}}/><GoogleIcon sx={{mr: 1}}/></>}

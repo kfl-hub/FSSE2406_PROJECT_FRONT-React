@@ -101,7 +101,7 @@ export default function ProductDetailPage() {
 
 
     }
-    const handleCheckOutOnClick = () => {
+    const handleGoToCartOnClick = () => {
         !loginUser
             ? handleOpenLoginDialog()
             : handleNavigateToCartPage()
@@ -318,7 +318,7 @@ export default function ProductDetailPage() {
                                 </IconButton>
                             </Box>
 
-                            <Button onClick={handleCheckOutOnClick} variant={"contained"} size={"large"}
+                            <Button onClick={handleGoToCartOnClick} variant={"contained"} size={"large"}
                                     sx={{fontSize: "1.3rem"}}
                                     endIcon={<ShoppingCartCheckOutIcon/>}>
                                 Go to Cart

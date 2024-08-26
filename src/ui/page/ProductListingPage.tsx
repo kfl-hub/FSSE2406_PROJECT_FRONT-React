@@ -6,6 +6,7 @@ import {getAllProduct} from "../../api/ProductApi.ts";
 import LoadingSpinner from "../component/LoadingSpinner.tsx";
 import {useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
+import {getCartQuantity} from "../../api/CartApi.ts";
 
 export default function ProductListingPage() {
 
@@ -17,6 +18,7 @@ export default function ProductListingPage() {
 
     useEffect(() => {
         const fetchData = async () => {
+          await getCartQuantity();
             const responseData = await getAllProduct();
             setProductDtoList(responseData)
         }

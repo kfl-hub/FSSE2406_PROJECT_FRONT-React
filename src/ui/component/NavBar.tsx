@@ -10,6 +10,7 @@ import {LoginUserContext} from "../../context/LoginUserContext.ts";
 import LoginButton from "./LoginButton.tsx";
 import ShopLogo from "./ShopLogo.tsx";
 import LogoutButton from "./LogoutButton.tsx";
+import NavMenuWeb from "./NavMenuWeb.tsx";
 
 
 const Search = styled('div')(({theme}) => ({
@@ -73,15 +74,14 @@ export default function NavBar() {
     const renderLoginUser = (): JSX.Element => {
         if (loginUser) {
             return <>
-                <>{loginUser.email}</>
-                <LogoutButton/>
+                <NavMenuWeb/>
                 </>
         } else if(loginUser===null) {
             return (
                 <LoginButton/>);
         }else {
             return (
-                <CircularProgress/>
+                <CircularProgress sx={{backgroundColor:"transparent"}}/>
             )
         }
     }
@@ -120,7 +120,7 @@ export default function NavBar() {
                             }, [navBarTheme.breakpoints.down('md')]: {
                                 mt: 16,
                             },
-                            backgroundColor: "black"
+                            backgroundColor: "transparent"
                         }}>
                             {renderLoginUser()}
                         </Box>

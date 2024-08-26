@@ -1,0 +1,42 @@
+import {useContext, useEffect, useState} from "react";
+import {LoginUserContext} from "../../context/LoginUserContext.ts";
+import Box from "@mui/material/Box";
+import LogoutButton from "./LogoutButton.tsx";
+import {Avatar, Divider, Typography} from "@mui/material";
+import CartButton from "./CartButton.tsx";
+import {getCartQuantity} from "../../api/CartApi.ts";
+
+export default function NavMenuWeb() {
+  const  loginUser=useContext(LoginUserContext);
+  const [cartQuantity,setCartQuantity] = useState<number|undefined>(undefined);
+  
+  useEffect(() => {
+    if (loginUser) {
+      const fetchData=async ()=>{
+        const response :number|undefined= await getCartQuantity();
+        setCartQuantity(response);
+      };
+      fetchData();
+    }
+  }, [loginUser]);
+  
+  
+  return(<Box width={500}
+              sx={{backgroundColor:'#111111', borderTopLeftRadius:90,borderBottomLeftRadius:90,
+                display: 'flex',alignItems: 'center',justifyContent: 'space-evenly'}}>
+      <Avatar sx={{backgroundColor:"orange",ml:-4}} children={`${loginUser!.email.split('@')[0][0]}`} />
+      <Box flexDirection={"column"}>
+      <Typography sx={{ml:-2}} variant={"body2"}>Welcome back!</Typography>
+      <Typography>
+        {loginUser!.email}</Typography>
+    </Box>
+      <Divider sx={{bgcolor:"white"}} variant={"middle"} orientation="vertical" flexItem />
+      <Box><CartButton cartQuantity={cartQuantity?cartQuantity:0}/></Box>
+      <Divider sx={{bgcolor:"white"}} variant={"middle"} orientation="vertical" flexItem />
+      <Box><LogoutButton/></Box>
+
+    </Box>
+    
+    
+  )
+};
