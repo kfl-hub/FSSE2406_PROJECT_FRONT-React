@@ -23,17 +23,17 @@ export const router = createBrowserRouter([
         element: <ProductDetailPage />
       },
       {
-        path: "error",
+        path: "/error",
         element: <ErrorPage />
       },
       {
         path: "/cart",
         element: <CartPage/>
       },
-      {
-        path: "/navMenu",
-        element: <NavMenuWeb/>
-      },
+      // {
+      //   path: "/thankyou",
+      //   element: <ThankYouPage/>
+      // },
       // {
       //   path: "/checkout/:transactionId",
       //   element: <CheckoutPage/>
