@@ -3,10 +3,7 @@ import {
     Dialog,
     DialogContent,
     Divider,
-    FormControl,
-    InputLabel,
     Paper,
-    Select,
     Snackbar,
     Tooltip
 } from "@mui/material";
@@ -22,7 +19,6 @@ import ShareIcon from "@mui/icons-material/Share";
 import {useNavigate, useParams} from "react-router-dom";
 import {getProductById} from "../../api/ProductApi.ts";
 import {GetProductDto} from "../../type/Product.type.ts";
-import MenuItem from "@mui/material/MenuItem";
 import HomeButton from "../component/HomeButton.tsx";
 import LoadingSpinner from "../component/LoadingSpinner.tsx";
 import Box from "@mui/material/Box";
@@ -30,6 +26,7 @@ import {LoginUserContext} from "../../context/LoginUserContext.ts";
 import LoginPage from "./LoginPage.tsx";
 import {putCartItem} from "../../api/CartApi.ts";
 import ShoeSizeSelectorDemo from "../component/ShoeSizeSelectorDemo.tsx";
+import {useCart} from "../../context/CartContext.tsx";
 
 export default function ProductDetailPage() {
     const [productDto, setProductDto] = useState<GetProductDto | undefined>(undefined);
@@ -40,6 +37,7 @@ export default function ProductDetailPage() {
     const [sizeAlertSnackOpen, setSizeAlertOPen] = useState(false);
     const {productId} = useParams<{ productId: string }>();
     const loginUser = useContext(LoginUserContext);
+    const {setCartQuantity} = useCart();
 
     const navigate = useNavigate();
     let cartDisable = false;
@@ -60,7 +58,7 @@ export default function ProductDetailPage() {
     }, [quantity])
 
     const handleIncrement = () => {
-        if (quantity < productDto?.stock) {
+        if (quantity < productDto!.stock!) {
             setQuantity((prev) => (prev + 1))
         }
     }
@@ -68,7 +66,7 @@ export default function ProductDetailPage() {
         setQuantity((prev) => (prev >= 1 ? prev - 1 : prev))
     }
     const handleQuantityOnChange = (value: string ) => {
-            const newValue = Math.min(productDto.stock, Number(value));
+            const newValue = Math.min(productDto!.stock!, Number(value));
 
         if (newValue <= 0) {
             setQuantity(1);
@@ -94,9 +92,8 @@ export default function ProductDetailPage() {
         if (productDto?.category.includes("Shoe") && !sizeValue) {
             setSizeAlertOPen(true);
         } else {
-            console.log(productDto?.category)
             handleAddToCartApi()
-
+            setCartQuantity((prev)=>prev?prev+1:1)
         }
 
 
@@ -128,7 +125,7 @@ export default function ProductDetailPage() {
 
     const sizeList = () => {
         if (productDto?.category === "menShoes") {
-            console.log("page size "+sizeValue);
+
             return (
                 <Box
                     display={"flex"}
@@ -281,17 +278,19 @@ export default function ProductDetailPage() {
                                                   handleDecrement={handleDecrement}
                                                   handleQuantityChange={handleQuantityOnChange}/>
 
-                                <Button onClick={handleAddToCartOnClick} sx={{mt: 2, fontSize: "1rem"}}
-                                        variant="contained"
-                                        disabled={cartDisable}
-                                        endIcon={<AddShoppingCartIcon/>}>
-                                    Add to Cart
-                                </Button>
+
                             </Box>
+
                             <Box aria-label={"SizeBox"} width={"100%"}>
                                 {sizeList()}
                             </Box>
                         </Box>
+                        <Button onClick={handleAddToCartOnClick}  sx={{width:440,mt: 2, fontSize: "1rem"}}
+                                variant="contained"
+                                disabled={cartDisable}
+                                endIcon={<AddShoppingCartIcon/>}>
+                            Add to Cart
+                        </Button>
                         <Typography variant={"subtitle1"} sx={{mt: 4, mb: 4, pr: 20, color: "#454545"}}>
                             {productDto?.description}
                         </Typography>

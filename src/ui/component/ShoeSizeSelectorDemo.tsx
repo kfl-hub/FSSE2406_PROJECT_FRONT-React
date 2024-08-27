@@ -22,8 +22,6 @@ export default function ShoeSizeSelectorDemo({category, value,handleOnSizeValueC
                 id="w-shoe-size"
                 value={value}
                 onChange={(e) => {
-                    console.log("seletor on change")
-                    console.log(e.target.value)
                     handleOnSizeValueChange(e.target.value+'')
                 }}
                 label="shoe-size"

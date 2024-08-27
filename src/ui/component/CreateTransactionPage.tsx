@@ -18,7 +18,7 @@ export default function CreateTransactionPage({handleCreateTransactionSuccess}:P
                 }}
             >
                 <BillStepper index={1}/>
-                <CircularProgress size={80}/>
+                <CircularProgress size={40}/>
                 <img width={300} src={"https://memeprod.sgp1.digitaloceanspaces.com/user-wtf/1568813214209.jpg"}/>
             </Box>
         </Container>

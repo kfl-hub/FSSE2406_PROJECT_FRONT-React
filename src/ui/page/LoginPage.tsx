@@ -1,8 +1,9 @@
 import React, {useContext, useState} from 'react';
 
-import {Alert, Box, Button, CircularProgress, Container, TextField} from '@mui/material';
+import {Alert, Box, Button, CircularProgress, Container, Divider, TextField} from '@mui/material';
 import * as FirebaseAuthService from '../../authService/FIrebaseAuthService.ts';
 import {LoginUserContext} from "../../context/LoginUserContext.ts";
+import {GoogleLoginButton} from "react-social-login-buttons";
 
 const LoginPage = ({onLoginSuccess}) => {
     const [email, setEmail] = useState('');
@@ -15,6 +16,15 @@ const LoginPage = ({onLoginSuccess}) => {
         loginResult ? onLoginSuccess() : setIsLoginFailed(true)
     };
 
+    const handleGoogleLogin=async ()=>{
+        const loginResult= await FirebaseAuthService.handleSignInWithGoogle();
+        if (loginResult) {
+            onLoginSuccess();
+        }else{
+            setIsLoginFailed(true);
+        }
+
+    }
     return (
         <Container sx={{backgroundColor: "white"}} component="main" maxWidth="xs">
             <Box
@@ -62,6 +72,8 @@ const LoginPage = ({onLoginSuccess}) => {
                     </Button>
                 </Box>
             </Box>
+            <Divider variant={"middle"}>or</Divider>
+            <GoogleLoginButton onClick={handleGoogleLogin}/>
         </Container>
     );
 };

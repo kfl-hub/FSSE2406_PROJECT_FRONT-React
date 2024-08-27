@@ -48,7 +48,7 @@ export const getCartQuantity=async ()=>{
     try {
         const response= await axios.get<number>(`${baseUrl}/cart/count`
           ,await getAuthConfig())
-        console.log(typeof response.data + response.data)
+
         return response.data;
     }catch (err){
         console.error(err)

@@ -10,6 +10,7 @@ import { useEffect, useState} from "react";
 import {UserData} from "./type/User.type.ts";
 import * as FirebaseAuthService from "./authService/FIrebaseAuthService.ts";
 import {LoginUserContext} from "./context/LoginUserContext.ts";
+import {CartQuantityProvider} from "./context/CartContext.tsx";
 
 
 const myTheme = createTheme({
@@ -41,7 +42,9 @@ const [loginUser,setLoginUser]=useState<UserData|null|undefined>(undefined);
   return (
 <ThemeProvider theme={myTheme}>
 <LoginUserContext.Provider value={loginUser}>
+  <CartQuantityProvider>
       <RouterProvider router={router}/>
+  </CartQuantityProvider>
 </LoginUserContext.Provider>
 </ThemeProvider>
   )

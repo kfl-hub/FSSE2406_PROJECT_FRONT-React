@@ -48,7 +48,7 @@ export default function CartTableRow({ item, onDeleteItem, onUpdateItem}: Props)
     }
     const handleOnSizeValueChange = (sizeValue: string) => {
         setSizeValue(sizeValue);
-        console.log("size changed")
+
     }
     const handleDeleteOnClick = async () => {
         if (await deleteCartItem(item.cid)) {
