@@ -1,5 +1,5 @@
 import {CartItemDto} from "../../type/Cart.type.ts";
-import {TableCell, TableRow} from "@mui/material";
+import {Alert, TableCell, TableRow} from "@mui/material";
 import {useEffect, useState} from "react";
 import QuantitySelector from "./QuantitySelector.tsx";
 import Box from "@mui/material/Box";
@@ -13,9 +13,10 @@ type Props = {
     item: CartItemDto,
     onDeleteItem: (cid: number) => void,
     onUpdateItem: (responseItem:CartItemDto) => void,
+    handleCheckOutDisable: (disable:boolean) => void,
 }
 
-export default function CartTableRow({ item, onDeleteItem, onUpdateItem}: Props) {
+export default function CartTableRow({ item, onDeleteItem, onUpdateItem,handleCheckOutDisable}: Props) {
     const [quantity, setQuantity] = useState<number>(1);
     const [sizeValue, setSizeValue] = useState<string>('');
 
@@ -25,7 +26,6 @@ export default function CartTableRow({ item, onDeleteItem, onUpdateItem}: Props)
     }, []);
 
     useEffect(() => {
-
         const updateItem = async () => {
             if (quantity !== item.cartQuantity || sizeValue !== item.size) {
                 await handleUpdateItem();
@@ -37,6 +37,14 @@ export default function CartTableRow({ item, onDeleteItem, onUpdateItem}: Props)
 
     }, [quantity, sizeValue]);
 
+    useEffect(()=>{
+        if (quantity>item.stock){
+            handleCheckOutDisable(true);
+        }else{
+            handleCheckOutDisable(false);
+        }
+    },[quantity])
+    
     const handleIncrement = () => {
         setQuantity((prev) => (prev + 1))
     }
@@ -83,7 +91,13 @@ export default function CartTableRow({ item, onDeleteItem, onUpdateItem}: Props)
                 handleIncrement={handleIncrement}
                 handleDecrement={handleDecrement}
                 handleQuantityChange={handleQuantityChange}
-                handleUpdateItem={handleUpdateItem}/></Box></TableCell>
+                handleUpdateItem={handleUpdateItem}/></Box>
+                {item.stock<quantity?<Alert
+                  severity="error"
+                  variant="filled"
+                  sx={{width: '100%' ,mt:1}}
+                >Stock not enough.
+                </Alert>:<></>}</TableCell>
             <TableCell sx={{fontSize: "1.1rem", fontWeight: 700}} align={"right"}
             >${quantity * item.price}.0
 

@@ -37,7 +37,7 @@ export default function ProductDetailPage() {
     const [sizeAlertSnackOpen, setSizeAlertOPen] = useState(false);
     const {productId} = useParams<{ productId: string }>();
     const loginUser = useContext(LoginUserContext);
-    const {setCartQuantity} = useCart();
+    const {cartQuantity,setCartQuantity} = useCart();
 
     const navigate = useNavigate();
     let cartDisable = false;
@@ -84,7 +84,7 @@ export default function ProductDetailPage() {
     const handleLoginSuccess = () => {
         setLoginDialogOpen(false);
     };
-    const handleAddToCartOnClick = () => {
+    const handleAddToCartOnClick = async () => {
         if (!loginUser) {
             handleOpenLoginDialog()
             return;
@@ -92,8 +92,7 @@ export default function ProductDetailPage() {
         if (productDto?.category.includes("Shoe") && !sizeValue) {
             setSizeAlertOPen(true);
         } else {
-            handleAddToCartApi()
-            setCartQuantity((prev)=>prev?prev+1:1)
+            await handleAddToCartApi()
         }
 
 
@@ -110,6 +109,7 @@ export default function ProductDetailPage() {
         if (await putCartItem(productDto!.pid, quantity, sizeValue)) {
             setQuantity(1);
             setAddCartSnackOpen(true);
+            setCartQuantity((prev)=>!prev||prev===0?1:prev+1);
         }
     }
 

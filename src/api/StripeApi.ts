@@ -15,7 +15,7 @@ const getAuthConfig = async () => {
     }
 }
 
-export const handleGoStripe = async (tid:number) => {
+export const callStripeCheckOut = async (tid:number) => {
     try {
         const authConfig = await getAuthConfig();
 

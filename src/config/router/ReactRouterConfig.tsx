@@ -6,6 +6,7 @@ import ProductListingPage from "../../ui/page/ProductListingPage.tsx";
 import ErrorPage from "../../ui/page/ErrorPage.tsx";
 import CartPage from "../../ui/page/CartPage.tsx";
 import ThankYouPage from "../../ui/page/ThankYouPage.tsx";
+import TransactionPage from "../../ui/page/TransactionPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -31,8 +32,12 @@ export const router = createBrowserRouter([
         element: <CartPage/>
       },
       {
-        path: "/thankyou",
+        path: "/thankyou/:tid",
         element: <ThankYouPage/>
+      },
+      {
+        path: "/transaction/:tid",
+        element: <TransactionPage/>
       },
       // {
       //   path: "/checkout/:transactionId",
