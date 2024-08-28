@@ -5,7 +5,7 @@ import Layout from "../../ui/Layout.tsx";
 import ProductListingPage from "../../ui/page/ProductListingPage.tsx";
 import ErrorPage from "../../ui/page/ErrorPage.tsx";
 import CartPage from "../../ui/page/CartPage.tsx";
-import NavMenuWeb from "../../ui/component/NavMenuWeb.tsx";
+import ThankYouPage from "../../ui/page/ThankYouPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -30,10 +30,10 @@ export const router = createBrowserRouter([
         path: "/cart",
         element: <CartPage/>
       },
-      // {
-      //   path: "/thankyou",
-      //   element: <ThankYouPage/>
-      // },
+      {
+        path: "/thankyou",
+        element: <ThankYouPage/>
+      },
       // {
       //   path: "/checkout/:transactionId",
       //   element: <CheckoutPage/>
