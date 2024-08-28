@@ -2,13 +2,15 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import VerticalAlignTopIcon from '@mui/icons-material/VerticalAlignTop';
 
 export default function BottomNav() {
   const [value, setValue] = React.useState(0);
-
+  
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <BottomNavigation
@@ -18,9 +20,10 @@ export default function BottomNav() {
           setValue(newValue);
         }}
       >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction onClick={scrollToTop} label="Top" icon={<VerticalAlignTopIcon />} />
+        {/*<BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />*/}
+
+
       </BottomNavigation>
     </Box>
   );

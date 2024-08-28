@@ -11,6 +11,7 @@ import {UserData} from "./type/User.type.ts";
 import * as FirebaseAuthService from "./authService/FIrebaseAuthService.ts";
 import {LoginUserContext} from "./context/LoginUserContext.ts";
 import {CartQuantityProvider} from "./context/CartContext.tsx";
+import FilterProvider from "./context/FilterContext.tsx";
 
 
 const myTheme = createTheme({
@@ -34,6 +35,7 @@ const myTheme = createTheme({
 function App() {
 const [loginUser,setLoginUser]=useState<UserData|null|undefined>(undefined);
 
+
   useEffect(()=>{
     FirebaseAuthService.handleOnAuthStateChanged(setLoginUser);
   },[])
@@ -42,9 +44,11 @@ const [loginUser,setLoginUser]=useState<UserData|null|undefined>(undefined);
   return (
 <ThemeProvider theme={myTheme}>
 <LoginUserContext.Provider value={loginUser}>
+  <FilterProvider>
   <CartQuantityProvider>
       <RouterProvider router={router}/>
   </CartQuantityProvider>
+  </FilterProvider>
 </LoginUserContext.Provider>
 </ThemeProvider>
   )

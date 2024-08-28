@@ -23,14 +23,14 @@ export default function NavMenuWeb() {
     }, [cartQuantity]);
 
 
-    return (<Box width={500}
+    return (<Box width={450} height={56}
                  sx={{
-                     backgroundColor: '#111111', borderTopLeftRadius: 90, borderBottomLeftRadius: 90,
+                     backgroundColor: '#111111', borderTopLeftRadius: 70, borderBottomLeftRadius: 70,
                      display: 'flex', alignItems: 'center', justifyContent: 'space-evenly'
                  }}>
             <Avatar sx={{backgroundColor: "orange", ml: -4}} children={`${loginUser!.email.split('@')[0][0]}`}/>
             <Box flexDirection={"column"}>
-                <Typography sx={{ml: -2}} variant={"body2"}>Welcome back!</Typography>
+                <Typography sx={{ml: -1}} variant={"body2"}>Welcome back!</Typography>
                 <Typography>
                     {loginUser!.email}</Typography>
             </Box>
