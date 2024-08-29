@@ -10,6 +10,7 @@ const LoginPage = ({onLoginSuccess}) => {
     const [password, setPassword] = useState('');
     const [isLoginFailed, setIsLoginFailed] = useState(false);
     const loginUser = useContext(LoginUserContext);
+
     const handleSubmitEmailAndPassword = async (e: React.FormEvent) => {
         e.preventDefault(); //must: avoid reload
         const loginResult = await FirebaseAuthService.handleSignInWithEmailAndPassword(email, password);

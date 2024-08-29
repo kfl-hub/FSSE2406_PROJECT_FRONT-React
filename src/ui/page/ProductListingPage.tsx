@@ -23,7 +23,7 @@ const [filteredList,setFilteredList] = useState<GetProductDto[]|undefined>(undef
             const responseData = await getAllProduct();
             if (responseData){
               if (filterText){
-              setFilteredList(responseData.filter((item)=>(item.name.toLowerCase().includes(filterText.toLowerCase()))));}
+              setFilteredList(responseData.filter((item:GetProductDto)=>(item.name.toLowerCase().includes(filterText.toLowerCase()))));}
               setProductDtoList(responseData);
             }
         }

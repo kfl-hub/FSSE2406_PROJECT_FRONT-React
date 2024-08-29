@@ -1,7 +1,6 @@
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import Button from "@mui/material/Button";
-import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {Dialog, DialogContent} from "@mui/material";
 import LoginPage from "../page/LoginPage.tsx";

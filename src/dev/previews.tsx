@@ -13,6 +13,7 @@ import LoginPage from "../ui/page/LoginPage.tsx";
 import CartPage from "../ui/page/CartPage.tsx";
 import ShoeSizeSelectorDemo from "../ui/component/ShoeSizeSelectorDemo.tsx";
 import CreateTransactionPage from "../ui/component/CreateTransactionPage.tsx";
+import AllProductButton from "../ui/component/AllProductButton.tsx";
 
 const ComponentPreviews = () => {
   return (
@@ -55,6 +56,9 @@ const ComponentPreviews = () => {
         </ComponentPreview>
         <ComponentPreview path="/CreateTransactionPage">
             <CreateTransactionPage/>
+        </ComponentPreview>
+        <ComponentPreview path="/AllProductButton">
+            <AllProductButton/>
         </ComponentPreview>
     </Previews>
   );

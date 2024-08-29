@@ -7,6 +7,7 @@ import ErrorPage from "../../ui/page/ErrorPage.tsx";
 import CartPage from "../../ui/page/CartPage.tsx";
 import ThankYouPage from "../../ui/page/ThankYouPage.tsx";
 import TransactionPage from "../../ui/page/TransactionPage.tsx";
+import FrontPage from "../../ui/page/FrontPage.tsx";
 
 
 export const router = createBrowserRouter([
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true, // This will be the default route
-        element: <ProductListingPage />
+        element: <FrontPage />
       },
       {
         path: "product/:productId",
@@ -39,15 +40,10 @@ export const router = createBrowserRouter([
         path: "/transaction/:tid",
         element: <TransactionPage/>
       },
-      // {
-      //   path: "/checkout/:transactionId",
-      //   element: <CheckoutPage/>
-      // },
+      {
+        path: "/product",
+        element: <ProductListingPage/>
+      },
     ]
   }
-
-  // {
-  //   path: "/thankyou",
-  //   element: <ThankYouPage/>
-  // }
 ])
