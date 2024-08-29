@@ -8,7 +8,7 @@ import {
     signInWithPopup, signOut
 } from "firebase/auth";
 import {UserData} from "../type/User.type.ts";
-import {useNavigate} from "react-router-dom";
+
 
 
 
@@ -77,7 +77,7 @@ export const handleSignOut = async () => {
     const auth = getAuth();
     try {
         await signOut(auth);
-        const navigate = useNavigate();
+
     } catch (error) {
         console.log(error);
     }

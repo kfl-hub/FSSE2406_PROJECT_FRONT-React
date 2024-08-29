@@ -20,7 +20,11 @@ const sliderSettingsFade = {
 };
 export default function WhatsNewBox({productDtoList,handleNavigateToProductDetail}:Props) {
 return(
-    <Box width={440} bgcolor={'rgba(0, 0, 0, 0.6)'} paddingLeft={4} marginTop={4} marginBottom={4} alignSelf={"start"} flexDirection={"column"} borderLeft={"solid"} borderTop={"solid"} borderColor={"white"}>
+    <Box width={440} bgcolor={'rgba(0, 0, 0, 0.6)'} paddingLeft={4}
+         marginTop={4} marginBottom={4}
+         alignSelf={"start"} flexDirection={"column"}
+         borderLeft={"solid"} borderTop={"solid"}
+         borderColor={"white"} sx={{borderBottomRightRadius:30}}>
         <Typography color={"white"} variant={"h2"}>What's new</Typography>
         <Slider {...sliderSettingsFade}>
             {productDtoList

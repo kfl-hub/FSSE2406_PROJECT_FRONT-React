@@ -23,7 +23,7 @@ const [filteredList,setFilteredList] = useState<GetProductDto[]|undefined>(undef
             const responseData = await getAllProduct();
             if (responseData){
               if (filterText){
-              setFilteredList(responseData.filter((item:GetProductDto)=>(item.name.toLowerCase().includes(filterText.toLowerCase()))));}
+              setFilteredList(responseData.filter((item:GetProductDto)=>(item.name.toLowerCase().includes(filterText.toLowerCase()) || item.category.toLowerCase().includes(filterText.toLowerCase()))));}
               setProductDtoList(responseData);
             }
         }
@@ -38,7 +38,7 @@ const [filteredList,setFilteredList] = useState<GetProductDto[]|undefined>(undef
   
   useEffect(() => {
     if(productDtoList){
-    setFilteredList(productDtoList?.filter((item)=>(item.name.toLowerCase().includes(filterText.toLowerCase()))));}
+    setFilteredList(productDtoList?.filter((item)=>(item.name.toLowerCase().includes(filterText.toLowerCase()) || item.category.toLowerCase().includes(filterText.toLowerCase()))));}
 
   }, [filterText]);
   

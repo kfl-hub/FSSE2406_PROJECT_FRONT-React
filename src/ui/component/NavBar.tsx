@@ -30,7 +30,7 @@ export default function NavBar() {
   const location = useLocation();
 
     const handleFilterChange=(e)=>{
-      if (location.pathname !== '/') {
+      if (location.pathname !== '/product') {
         navigate('/product');}
       setFilterText(e.target.value);
     }
