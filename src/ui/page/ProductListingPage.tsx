@@ -1,6 +1,6 @@
 
 import ProductCard from "../component/ProductCard.tsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {GetProductDto} from "../../type/Product.type.ts";
 import {getAllProduct} from "../../api/ProductApi.ts";
 import LoadingSpinner from "../component/LoadingSpinner.tsx";
@@ -8,16 +8,21 @@ import {useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
 import {getCartQuantity} from "../../api/CartApi.ts";
 import {useFilter} from "../../context/FilterContext.tsx";
+import {LoginUserContext} from "../../context/LoginUserContext.ts";
 
 export default function ProductListingPage() {
 const [filteredList,setFilteredList] = useState<GetProductDto[]|undefined>(undefined);
     const [productDtoList, setProductDtoList] = useState<GetProductDto[]|undefined>(undefined);
     const {filterText} =useFilter();
     const navigate = useNavigate();
+    const loginUser =useContext(LoginUserContext);
     
 
 
     useEffect(() => {
+        if (loginUser){
+
+
         const fetchData = async () => {
           await getCartQuantity();
             const responseData = await getAllProduct();
@@ -32,8 +37,8 @@ const [filteredList,setFilteredList] = useState<GetProductDto[]|undefined>(undef
         }catch (err){
           console.error(err);
         }
-
-    }, [])
+        }
+    }, [loginUser])
   
   
   useEffect(() => {
@@ -60,7 +65,7 @@ const [filteredList,setFilteredList] = useState<GetProductDto[]|undefined>(undef
         <Box sx={{
             backgroundColor: 'rgba(0, 0, 0, 0.3)',
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'start',
             justifyContent: 'center',
             flexWrap: "wrap",
             minHeight: '100vh',

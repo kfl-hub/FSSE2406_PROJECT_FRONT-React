@@ -2,13 +2,13 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import {CircularProgress, createTheme, InputAdornment, TextField, ThemeProvider, Typography} from "@mui/material";
-import React, {useContext} from "react";
+import {useContext} from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import {LoginUserContext} from "../../context/LoginUserContext.ts";
 import LoginButton from "./LoginButton.tsx";
 import ShopLogo from "./ShopLogo.tsx";
 import NavMenuWeb from "./NavMenuWeb.tsx";
-import {FilterContext, useFilter} from "../../context/FilterContext.tsx";
+import {useFilter} from "../../context/FilterContext.tsx";
 import {useLocation, useNavigate} from "react-router-dom";
 
 const navBarTheme = createTheme({
@@ -25,28 +25,30 @@ const navBarTheme = createTheme({
 
 export default function NavBar() {
     const loginUser = useContext(LoginUserContext);
-    const {filterText,setFilterText} =useFilter();
-  const navigate = useNavigate();
-  const location = useLocation();
+    const {filterText, setFilterText} = useFilter();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const handleFilterChange=(e)=>{
-      if (location.pathname !== '/product') {
-        navigate('/product');}
-      setFilterText(e.target.value);
+    const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        if (location.pathname !== '/product') {
+            navigate('/product');
+        }
+        setFilterText(e.target.value);
     }
-    
-    
+
+
     const renderLoginUser = (): JSX.Element => {
         if (loginUser) {
             return <>
                 <NavMenuWeb/>
-                </>
-        } else if(loginUser===null) {
+            </>
+        } else if (loginUser === null) {
             return (
                 <LoginButton/>);
-        }else {
+        } else {
             return (
-                <CircularProgress sx={{backgroundColor:"transparent"}}/>
+                <CircularProgress sx={{backgroundColor: "transparent"}}/>
             )
         }
     }
@@ -58,41 +60,52 @@ export default function NavBar() {
                     <Toolbar variant={"regular"}
                              sx={{
                                  height: 200,
-                                 justifyContent: 'space-around',
-                                 [navBarTheme.breakpoints.up('md')]: {
-                                     justifyContent: 'space-around',
-                                 }, [navBarTheme.breakpoints.down('xl')]: {
+                                 justifyContent: 'space-around'
+                                 ,
+                                 [navBarTheme.breakpoints.down('md')]: {
                                      display: "flex",
                                      flexDirection: "column",
+                                     alignContent: 'center',
+                                     height: 280,
+                                 },
+                                 [navBarTheme.breakpoints.up('md')]: {
+                                     display: "flex",
+                                     flexDirection: "column",
+                                     alignItems: 'space-around',
+                                     height: 380,
+                                 },
+                                 [navBarTheme.breakpoints.up('lg')]: {
+                                     display: "flex",
+                                     flexDirection: "column",
+                                     alignContent: 'space-around',
+                                     height: 300,
+                                 },
+                                 [navBarTheme.breakpoints.up("xl")]: {
+                                 height: 200,
+                                     display: "flex",
+                                     flexDirection: "row",
                                  justifyContent: 'space-around',
-                                     height: 320,
-                                     alignItems: ""
-                                 }
+                             }
                              }}
                     >
-                        <Typography bgcolor={'rgba(255, 255, 255, 0.3)'}>
-                          <TextField
-                          bgcolor="white"
-                          variant="outlined"
-                          value={filterText}
-                          onChange={handleFilterChange}
-                          placeholder="Product name..."
-                          InputProps={{
-                            sx: { color: 'white' ,width:440},
-                              startAdornment: (
-                                <InputAdornment position="start">
-                                    <SearchIcon sx={{ color: 'white' }}/>
-                                </InputAdornment>
-                              ),
-                          }}
-                        /></Typography>
+                        <Typography bgcolor={'rgba(255, 255, 255, 0.3)'}
+                        sx={{mt:2}}>
+                            <TextField
+                                variant="outlined"
+                                value={filterText}
+                                onChange={handleFilterChange}
+                                placeholder="Product name..."
+                                InputProps={{
+                                    sx: {color: 'white', width: 440},
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon sx={{color: 'white'}}/>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            /></Typography>
                         <ShopLogo/>
                         <Box sx={{
-                            [navBarTheme.breakpoints.down('sm')]: {
-                                mt: 16,
-                            }, [navBarTheme.breakpoints.down('md')]: {
-                                mt: 16,
-                            },
                             backgroundColor: "transparent"
                         }}>
                             {renderLoginUser()}

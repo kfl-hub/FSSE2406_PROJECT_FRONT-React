@@ -43,7 +43,7 @@ export const getTransactionByTid = async (tid: number) => {
   }
 };
 
-export const payTransaction = async (id: string) => {
+export const payTransaction = async (id: number) => {
   try {
     const response = await axios.patch(
       `${baseUrl}/transaction/${id}/pay`, null,

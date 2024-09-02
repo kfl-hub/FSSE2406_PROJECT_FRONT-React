@@ -6,14 +6,10 @@ import {createTransaction, payTransaction} from "../../api/TransactionApi.ts";
 import {TransactionDto} from "../../type/Transaction.type.ts";
 import * as StripeApi from "../../api/StripeApi.ts";
 
-type Props = {
-
-}
-
 
 export default function CreateTransactionPage() {
     const [stepperIndex,setStepperIndex]=useState<number>(1);
-    const [spinnerColor,setSpinnerColor]=useState<string>("primary");
+    const [spinnerColor,setSpinnerColor]=useState<"primary"|"success">("primary");
     const [loadingImgUrl,setLoadingImgUrl]=useState<string>("/moneygone.jpg");
 
 
@@ -31,7 +27,7 @@ export default function CreateTransactionPage() {
             }
         }
         const stateTransactionToProcessing=async (tid:number)=>{
-        const response:any=await payTransaction(tid);
+        const response=await payTransaction(tid);
           if (response) {
             await StripeApi.callStripeCheckOut(tid);
           }else{

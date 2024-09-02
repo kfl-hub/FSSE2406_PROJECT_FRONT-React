@@ -23,11 +23,11 @@ type Props = {
 export default function ProductCard({productDto, onProductClick}: Props) {
 
     const navigate = useNavigate();
-    let cardHeight=500;
-    let imgHeight=230;
-    if (productDto?.category === "supplement") {
-        cardHeight=560;
-        imgHeight=320;
+    let imgfit="cover";
+    const cardHeight=500;
+    const imgHeight=230;
+    if (productDto?.category === "Supplement") {
+        imgfit="contain";
     }
 
     const handleNavigateToProductDetail = (productId: number) => {
@@ -68,7 +68,12 @@ export default function ProductCard({productDto, onProductClick}: Props) {
                 />
                 <Tooltip title="Product Detail" placement={"top"}>
                     <CardMedia
-                        sx={{mb: -2}}
+                        sx={{
+                            mb: -2,
+                            height: imgHeight,
+                            objectFit: imgfit,
+                            width: '100%',
+                        }}
                         component="img"
                         height={imgHeight}
                         image={productDto.imageUrl}
@@ -86,6 +91,7 @@ export default function ProductCard({productDto, onProductClick}: Props) {
                                     textOverflow: "ellipsis",
                                 }}>
                         {truncatedDescription}
+
                     </Typography>
                 </CardContent>
                 <CardActions sx={{marginTop: 'auto'}}>

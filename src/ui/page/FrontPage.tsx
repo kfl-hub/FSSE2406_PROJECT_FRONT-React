@@ -9,11 +9,13 @@ import LoadingSpinner from "../component/LoadingSpinner.tsx";
 import {useNavigate} from "react-router-dom";
 import WhatsNewBox from "../component/WhatsNewBox.tsx";
 import CategoryBox from "../component/CategoryBox.tsx";
+import {useTheme} from "@mui/material";
 
 
 export default function FrontPage() {
     const [productDtoList, setProductDtoList] = useState<GetProductDto[] | undefined>(undefined);
     const navigate = useNavigate();
+const theme=useTheme();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,9 +39,12 @@ export default function FrontPage() {
                 backgroundColor: 'rgba(0, 0, 0, 0.1)',
                 display: 'flex',
                 alignItems: 'center',
+                flexWrap:"wrap",
                 justifyContent: 'space-evenly',
-                minHeight: '100%',
-                width: "100%"
+                width: "100%",
+                [theme.breakpoints.down("md")]:{
+
+                }
             }}>
                 <WhatsNewBox productDtoList={productDtoList}
                              handleNavigateToProductDetail={handleNavigateToProductDetail}/>
@@ -54,11 +59,14 @@ export default function FrontPage() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'end',
-                    width: "100%"
+                    width: "100%",
+                    [theme.breakpoints.down("md")]:{
+                        justifyContent: 'center',
+                    }
                 }}>
                     <CategoryBox productDtoList={productDtoList}
                                  handleNavigateToProductDetail={handleNavigateToProductDetail}
-                                 category={"menShoes"}/>
+                                 category={"Men Running Shoes"}/>
                 </Box>
                 {/*Women shoes*/}
                 <Box sx={{
@@ -69,11 +77,14 @@ export default function FrontPage() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'start',
-                    width: "100%"
+                    width: "100%",
+                    [theme.breakpoints.down("md")]:{
+                        justifyContent: 'center',
+                    }
                 }}>
                     <CategoryBox productDtoList={productDtoList}
                                  handleNavigateToProductDetail={handleNavigateToProductDetail}
-                                 category={"womenShoes"}/>
+                                 category={"Women Running Shoes"}/>
                 </Box>
                 {/*Accessories*/}
                 <Box sx={{
@@ -84,11 +95,14 @@ export default function FrontPage() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'end',
-                    width: "100%"
+                    width: "100%",
+                    [theme.breakpoints.down("md")]:{
+                        justifyContent: 'center',
+                    }
                 }}>
                     <CategoryBox productDtoList={productDtoList}
                                  handleNavigateToProductDetail={handleNavigateToProductDetail}
-                                 category={"accessories"}/>
+                                 category={"Accessories"}/>
                 </Box>
                 {/*Supplement*/}
                 <Box sx={{
@@ -99,11 +113,14 @@ export default function FrontPage() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'start',
-                    width: "100%"
+                    width: "100%",
+                    [theme.breakpoints.down("md")]:{
+                        justifyContent: 'center',
+                    }
                 }}>
                     <CategoryBox productDtoList={productDtoList}
                                  handleNavigateToProductDetail={handleNavigateToProductDetail}
-                                 category={"supplement"}/>
+                                 category={"Supplement"}/>
                 </Box>
 
             </>

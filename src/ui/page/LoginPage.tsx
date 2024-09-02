@@ -5,7 +5,12 @@ import * as FirebaseAuthService from '../../authService/FIrebaseAuthService.ts';
 import {LoginUserContext} from "../../context/LoginUserContext.ts";
 import {GoogleLoginButton} from "react-social-login-buttons";
 
-const LoginPage = ({onLoginSuccess}) => {
+type Props={
+    onLoginSuccess:()=>void,
+}
+
+
+const LoginPage = ({onLoginSuccess}:Props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoginFailed, setIsLoginFailed] = useState(false);

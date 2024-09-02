@@ -10,18 +10,21 @@ import {useCart} from "../../context/CartContext.tsx";
 
 
 const ThankYouPage = () => {
-  const {tid} = useParams<{ tid: number }>();
+  const {tid} = useParams<{ tid: string|undefined }>();
   const loginUser = useContext(LoginUserContext);
 const {setCartQuantity}=useCart();
   
   useEffect(() => {
       const callFinish = async () => {
-        const response = await finishTransaction(tid);
+          if (tid!==undefined){
+        const response = await finishTransaction(Number(tid));
+
         if (response) {
           setCartQuantity(0);
         } else {
           console.error("finish trans api failed")
         }
+          }
       }
       if (loginUser){
         try{

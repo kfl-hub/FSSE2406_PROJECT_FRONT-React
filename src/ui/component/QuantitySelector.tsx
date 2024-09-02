@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Box, Button, TextField} from '@mui/material';
+import {Box, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import IconButton from "@mui/material/IconButton";
@@ -13,7 +13,7 @@ type Props={
     handleUpdateItem?:()=>void,
 }
 
-function QuantitySelector({cartDisable,quantity,handleDecrement,handleIncrement,handleQuantityChange,handleUpdateItem}:Props) {
+function QuantitySelector({cartDisable,quantity,handleDecrement,handleIncrement,handleQuantityChange}:Props) {
 const [removeDisable,setRemoveDisable]=useState(true);
 
 useEffect(():void=>{

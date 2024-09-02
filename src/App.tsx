@@ -6,7 +6,7 @@ import '@fontsource/roboto/700.css';
 import { RouterProvider} from "react-router-dom";
 import {router} from "./config/router/ReactRouterConfig.tsx";
 import {createTheme, ThemeProvider} from "@mui/material";
-import { useEffect, useState} from "react";
+import  { useEffect, useState} from "react";
 import {UserData} from "./type/User.type.ts";
 import * as FirebaseAuthService from "./authService/FIrebaseAuthService.ts";
 import {LoginUserContext} from "./context/LoginUserContext.ts";

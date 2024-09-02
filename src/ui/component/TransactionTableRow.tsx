@@ -1,13 +1,9 @@
-import {CartItemDto} from "../../type/Cart.type.ts";
-import {Alert, TableCell, TableRow} from "@mui/material";
-import {useEffect, useState} from "react";
-import QuantitySelector from "./QuantitySelector.tsx";
+
+import { TableCell, TableRow} from "@mui/material";
+
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from '@mui/icons-material/Delete';
-import {deleteCartItem, patchCartItem} from "../../api/CartApi.ts";
-import ShoeSizeSelectorDemo from "./ShoeSizeSelectorDemo.tsx";
+
 import {TransactionItem} from "../../type/Transaction.type.ts";
 
 type Props = {

@@ -6,8 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import {
   Button,
-  Dialog,
-  DialogContent,
+
   Divider,
   Table,
   TableBody,
@@ -16,10 +15,7 @@ import {
   TableHead,
   TableRow
 } from "@mui/material";
-import CartTableRow from "../component/CartTableRow.tsx";
 import BillStepper from "../component/BillStepper.tsx";
-import CheckoutButton from "../component/CheckoutButton.tsx";
-import CreateTransactionPage from "../component/CreateTransactionPage.tsx";
 import {TransactionDto} from "../../type/Transaction.type.ts";
 import {useParams} from "react-router-dom";
 import {getTransactionByTid} from "../../api/TransactionApi.ts";
@@ -28,20 +24,20 @@ import {callStripeCheckOut} from "../../api/StripeApi.ts";
 
 export default function TransactionPage() {
   const [transactionDto, setTransactionDto] = useState<TransactionDto | undefined>(undefined);
-  const {tid} = useParams<{ tid: number }>();
+  const {tid} = useParams<{ tid: string|undefined }>();
   const loginUser = useContext(LoginUserContext);
   
 
   const grandTotal = transactionDto?.total;
   
   const handleTryAgainOnClick=async ()=>{
-    callStripeCheckOut(tid);
+    callStripeCheckOut(Number(tid));
   }
   
   useEffect(() => {
     if (loginUser) {
       const fetchData = async () => {
-        const responseData = await getTransactionByTid(tid);
+        const responseData = await getTransactionByTid(Number(tid));
         setTransactionDto(responseData);
       };
       fetchData();
@@ -49,7 +45,7 @@ export default function TransactionPage() {
     
   }, [loginUser])
   
-  return !transactionDto
+  return !transactionDto || !grandTotal
     ? <LoadingSpinner/>
     : (<Box sx={{
         background: `url(https://images.unsplash.com/photo-1539182972012-585804f77548?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
@@ -114,7 +110,7 @@ export default function TransactionPage() {
                              justifyContent={"end"} alignContent={"center"}>
                           
                           
-                          <Button size={"large"} fullWidth={1} variant={"contained"}
+                          <Button size={"large"} fullWidth variant={"contained"}
                           onClick={handleTryAgainOnClick}
                           >Try again</Button>
                           

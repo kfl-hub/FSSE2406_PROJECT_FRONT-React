@@ -13,20 +13,28 @@ const sliderSettings = {
     dots: false,
     infinite: true,
     slidesToShow: 3,
-    slidesToScroll: 3,
+    swipeToSlide: true,
     waitForAnimate: false,
+    responsive:[{
+        breakpoint:1650,
+        settings:{
+            slidesToShow: 2,
+        }},
+        {
+            breakpoint:1140,
+            settings:{
+                slidesToShow: 1,
+            }
+    }]
 };
 export default function CategoryBox({productDtoList,handleNavigateToProductDetail,category}:Props) {
-const renderTitle=()=>(category==="menShoes"
-    ?"Men Running Shoes"
-    :category==="womenShoes"
-        ?"Women Running Shoes":
-        category==="accessories"?
-            "Accessories"
-            :"Supplement");
+const renderTitle=()=>(category);
 
 return(
-    <Box width={"64%"} bgcolor={'rgba(0, 0, 0, 0.6)'} paddingLeft={4} margin={4} alignSelf={"start"} flexDirection={"column"} borderLeft={"solid"} borderTop={"solid"} borderColor={"white"}>
+    <Box width={"64%"} minWidth={400} bgcolor={'rgba(0, 0, 0, 0.6)'}
+         paddingLeft={4} margin={4}
+         alignSelf={"start"} flexDirection={"column"}
+         borderLeft={"solid"} borderTop={"solid"} borderColor={"white"}>
         <Typography color={"white"} variant={"h2"}>{renderTitle()}</Typography>
         <Slider {...sliderSettings}>
             {productDtoList

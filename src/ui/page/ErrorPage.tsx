@@ -1,10 +1,9 @@
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+
+import { Box, Typography } from '@mui/material';
 import HomeButton from "../component/HomeButton.tsx";
 
 const ErrorPage = () => {
-    const navigate = useNavigate();
+
 
 
     return (
