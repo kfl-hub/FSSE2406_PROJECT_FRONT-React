@@ -42,9 +42,7 @@ const theme=useTheme();
                 flexWrap:"wrap",
                 justifyContent: 'space-evenly',
                 width: "100%",
-                [theme.breakpoints.down("md")]:{
-
-                }
+                minWidth:400
             }}>
                 <WhatsNewBox productDtoList={productDtoList}
                              handleNavigateToProductDetail={handleNavigateToProductDetail}/>

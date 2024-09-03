@@ -10,7 +10,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import CallMadeIcon from '@mui/icons-material/CallMade';
 import {GetProductDto} from "../../type/Product.type.ts";
 import {useNavigate} from "react-router-dom";
-import {CircularProgress, Tooltip} from "@mui/material";
+import {CircularProgress, Tooltip,} from "@mui/material";
 import Box from "@mui/material/Box";
 
 type Props = {
@@ -25,7 +25,7 @@ export default function ProductCard({productDto, onProductClick}: Props) {
     const navigate = useNavigate();
     let imgfit="cover";
     const cardHeight=500;
-    const imgHeight=230;
+    const imgHeight="40%";
     if (productDto?.category === "Supplement") {
         imgfit="contain";
     }
@@ -54,10 +54,10 @@ export default function ProductCard({productDto, onProductClick}: Props) {
 
     return (productDto ?
             <Card sx={{
-                width: 350, height:cardHeight,
-                m: 2, border: 1, display: 'flex', flexDirection: 'column'
+                width: "90%", height:cardHeight,
+                m: 2, border: 1, display:"flex", flexDirection: 'column'
             }}>
-                <CardHeader sx={{height: 110, mb: -2}}
+                <CardHeader sx={{height: "30%", mb: -2, alignItems:"flex-start"}}
                             action={<>
                                 <IconButton aria-label="go detail" onClick={() => onProductClick(productDto.pid)}>
                                     <CallMadeIcon/>
@@ -73,7 +73,7 @@ export default function ProductCard({productDto, onProductClick}: Props) {
                             height: imgHeight,
                             objectFit: imgfit,
                             width: '100%',
-                        }}
+                    }}
                         component="img"
                         height={imgHeight}
                         image={productDto.imageUrl}

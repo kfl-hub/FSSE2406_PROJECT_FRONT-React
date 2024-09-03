@@ -9,7 +9,7 @@ export default function AllProductButton() {
     }
 
     return (
-        <Button color="primary" variant={"contained"}  sx={{mt: 2,width:500,height:100, fontSize: "2rem"}}
+        <Button color="primary" variant={"contained"}  sx={{mt: 2,width:{xl:"30%",lg:"30%",md:"90%",sm:"90%"},height:100, fontSize: "2rem"}}
                 onClick={handleNavigateToProduct}
         endIcon={<AllOutIcon style={{ fontSize: "3rem" }}/>}>
            All Products

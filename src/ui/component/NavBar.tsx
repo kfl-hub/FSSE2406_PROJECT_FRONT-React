@@ -96,7 +96,7 @@ export default function NavBar() {
                                 onChange={handleFilterChange}
                                 placeholder="Product name..."
                                 InputProps={{
-                                    sx: {color: 'white', width: 440},
+                                    sx: {color: 'white', width: 384},
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <SearchIcon sx={{color: 'white'}}/>

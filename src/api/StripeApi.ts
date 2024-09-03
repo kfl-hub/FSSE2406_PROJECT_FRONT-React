@@ -1,6 +1,8 @@
 import * as FirebaseAuthService from "../authService/FIrebaseAuthService.ts";
+import getEnvConfig from "../config/env/EnvConfig.ts";
 //const baseUrl:string="http://localhost:8080"
-const baseUrl:string="http://ec2-47-129-34-31.ap-southeast-1.compute.amazonaws.com:8080"
+//const baseUrl:string="http://ec2-47-129-34-31.ap-southeast-1.compute.amazonaws.com:8080"
+const baseUrl=getEnvConfig().baseUrl;
 
 const getAuthConfig = async () => {
     const accessToken = await FirebaseAuthService.getAccessToken();

@@ -20,7 +20,7 @@ const sliderSettingsFade = {
 };
 export default function WhatsNewBox({productDtoList,handleNavigateToProductDetail}:Props) {
 return(
-    <Box maxWidth={"32%"} width={450} minWidth={400}
+    <Box maxWidth={"32%"} width={450} minWidth={380}
          bgcolor={'rgba(0, 0, 0, 0.6)'} paddingLeft={4}
          marginTop={4} marginBottom={4}
          alignSelf={"start"} flexDirection={"column"}

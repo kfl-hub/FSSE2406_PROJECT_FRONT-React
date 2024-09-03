@@ -6,7 +6,6 @@ import {getAllProduct} from "../../api/ProductApi.ts";
 import LoadingSpinner from "../component/LoadingSpinner.tsx";
 import {useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
-import {getCartQuantity} from "../../api/CartApi.ts";
 import {useFilter} from "../../context/FilterContext.tsx";
 import {LoginUserContext} from "../../context/LoginUserContext.ts";
 
@@ -20,11 +19,8 @@ const [filteredList,setFilteredList] = useState<GetProductDto[]|undefined>(undef
 
 
     useEffect(() => {
-        if (loginUser){
-
 
         const fetchData = async () => {
-          await getCartQuantity();
             const responseData = await getAllProduct();
             if (responseData){
               if (filterText){
@@ -37,7 +33,7 @@ const [filteredList,setFilteredList] = useState<GetProductDto[]|undefined>(undef
         }catch (err){
           console.error(err);
         }
-        }
+
     }, [loginUser])
   
   

@@ -1,8 +1,9 @@
 import axios from "axios";
+import getEnvConfig from "../config/env/EnvConfig.ts";
 
 // const baseUrl:string="http://localhost:8080"
-const baseUrl:string="http://ec2-47-129-34-31.ap-southeast-1.compute.amazonaws.com:8080"
-
+//const baseUrl:string="https://d2pzk7o9v2057n.cloudfront.net"
+const baseUrl=getEnvConfig().baseUrl;
 
 export const getAllProduct=async ()=>{
     try{
