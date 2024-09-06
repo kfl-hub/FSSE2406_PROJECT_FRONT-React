@@ -54,7 +54,7 @@ export default function ProductCardSmall({productDto, onProductClick}: Props) {
     const renderSoldOutIcon = () => {
         if (productDto !== undefined) {
             if (!productDto.hasStock) {
-                return <img width={40}
+                return <img width={24}
                             src={"/soldOut.png"}
                             alt={"sold-out"}/>;
             }
@@ -62,8 +62,7 @@ export default function ProductCardSmall({productDto, onProductClick}: Props) {
         return null;
     };
 
-
-    // @ts-ignore
+    
     // @ts-ignore
     return (productDto ?
             <Card sx={{
@@ -111,30 +110,17 @@ export default function ProductCardSmall({productDto, onProductClick}: Props) {
 
                     </Typography>
                 </CardContent>
-                {/*                <CardContent sx={{flexDirection:"column",display: {xl: "none", lg: "none", md: "none", sm: "flex", xs: "flex"}}}>*/}
-                {/*                    <Typography variant="body1"*/}
-                {/*                                color="text.primary"*/}
-                {/*                                sx={{*/}
-                {/*                                    height: "40%",*/}
-                {/*                                }}>*/}
-                {/*                        {productDto.name}*/}
-                {/*                    </Typography>*/}
-                {/*                    <Typography variant="body2"*/}
-                {/*                                color="text.primary"*/}
-                {/*>*/}
-                {/*                        {productDto.price}*/}
-                {/*                    </Typography>*/}
-                {/*                </CardContent>*/}
+
                 <Box sx={{display: {xl: "none", lg: "none", md: "none", sm: "flex", xs: "flex"},
                     flexDirection: "row"}}>
-                    <Box sx={{width: "40%", height: "100%%", objectFit: "cover", mt: 2, mb: -1}}>
+                    <Box sx={{alignContent:"center",minWidth: "20%",  objectFit: "cover", mt: 2, mb: -1}}>
                         <img width={"100%"} src={productDto.imageUrl}/></Box>
                     <Box sx={{
-                        mx: 1,
+                        mx: 1,minWidth: "60%",
                         alignContent: "center",
                         display: {xl: "none", lg: "none", md: "none"}
                     }}>
-                        <Typography variant={"h6"}>{productDto.name}</Typography>
+                        <Typography sx={{fontSize:"1.1rem" ,fontWeight:"500"}}>{productDto.name}</Typography>
                         <Typography variant={"subtitle1"}>${productDto.price}.0</Typography>
                         <Box>
                             <IconButton aria-label="add to favorites">
