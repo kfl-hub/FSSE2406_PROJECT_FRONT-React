@@ -54,7 +54,7 @@ export default function ProductCard({productDto, onProductClick}: Props) {
 
     return (productDto ?
             <Card sx={{
-                width: "90%", height:cardHeight,
+                width: 350, height:cardHeight,
                 m: 2, border: 1, display:"flex", flexDirection: 'column'
             }}>
                 <CardHeader sx={{height: "30%", mb: -2, alignItems:"flex-start"}}
