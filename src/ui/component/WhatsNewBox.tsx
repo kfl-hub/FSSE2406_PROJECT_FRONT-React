@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import {Typography} from "@mui/material";
 import Slider from "react-slick";
-import ProductCard from "./ProductCard.tsx";
+import ProductCardSlider from "./ProductCardSlider.tsx";
 import {GetProductDto} from "../../type/Product.type.ts";
 
 type Props={
@@ -31,8 +31,8 @@ return(
             {productDtoList
                 .slice(-3)
                 .map((item) => (
-                    <ProductCard key={item.pid} productDto={item}
-                                 onProductClick={()=>handleNavigateToProductDetail}/>))}
+                    <ProductCardSlider key={item.pid} productDto={item}
+                                       onProductClick={()=>handleNavigateToProductDetail}/>))}
         </Slider>
     </Box>
 )

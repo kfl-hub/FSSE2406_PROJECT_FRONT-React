@@ -1,5 +1,4 @@
 
-import ProductCard from "../component/ProductCard.tsx";
 import {useContext, useEffect, useState} from "react";
 import {GetProductDto} from "../../type/Product.type.ts";
 import {getAllProduct} from "../../api/ProductApi.ts";
@@ -8,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import Box from "@mui/material/Box";
 import {useFilter} from "../../context/FilterContext.tsx";
 import {LoginUserContext} from "../../context/LoginUserContext.ts";
+import ProductCardList from "../component/ProductCardList.tsx";
 
 export default function ProductListingPage() {
 const [filteredList,setFilteredList] = useState<GetProductDto[]|undefined>(undefined);
@@ -50,10 +50,10 @@ const [filteredList,setFilteredList] = useState<GetProductDto[]|undefined>(undef
     const renderProductCard = () => {
       if (filteredList === undefined ){
         return productDtoList?.map((item) => (
-            <ProductCard key={item.pid} productDto={item} onProductClick={handleNavigateToProductDetail}/>
+            <ProductCardList key={item.pid} productDto={item} onProductClick={handleNavigateToProductDetail}/>
         ))}else{
         return filteredList.map((item) => (
-          <ProductCard key={item.pid} productDto={item} onProductClick={handleNavigateToProductDetail}/>
+          <ProductCardList key={item.pid} productDto={item} onProductClick={handleNavigateToProductDetail}/>
         ))}
     };
 

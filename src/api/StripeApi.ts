@@ -24,7 +24,7 @@ export const callStripeCheckOut = async (tid:number) => {
         const response = await fetch(`${baseUrl}/checkout/create-checkout-session/${tid}`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+
                 ...authConfig.headers,
             },
         });

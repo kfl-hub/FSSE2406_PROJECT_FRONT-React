@@ -5,9 +5,9 @@ import {GetProductDto} from "../../type/Product.type.ts";
 import  {useEffect, useState} from "react";
 import ProductCardSmall from "./ProductCardSmall.tsx";
 
-import ProductCard from "./ProductCard.tsx";
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import MinimizeIcon from '@mui/icons-material/Minimize';
+import ProductCardList from "./ProductCardList.tsx";
 
 type Props = {
   productDtoList: GetProductDto[],
@@ -50,7 +50,7 @@ export default function CategoryBox({productDtoList, handleNavigateToProductDeta
     return productDtoList
       .filter((item) => (item.category === (category)))
       .map((item) => (
-        <ProductCard key={item.pid} productDto={item} onProductClick={handleNavigateToProductDetail}/>
+        <ProductCardList key={item.pid} productDto={item} onProductClick={handleNavigateToProductDetail}/>
       ))
   };
   const renderAll = () => (
