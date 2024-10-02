@@ -2,7 +2,10 @@ import Typography from "@mui/material/Typography";
 import {useNavigate} from "react-router-dom";
 import {Tooltip, useTheme} from "@mui/material";
 
-export default function ShopLogo() {
+type Props={
+    size:number;
+}
+export default function ShopLogo({size}:Props) {
     const navigate = useNavigate();
     const handleNavigateToFront = () => {
         navigate("/")
@@ -12,11 +15,11 @@ export default function ShopLogo() {
 
     return(<Tooltip title="Home" placement={"right"}>
         <Typography onClick={handleNavigateToFront} component="div"
-                    sx={{ml: 30, mr: 30, mb: -5,mt: -1, position: 'absolute',
+                    sx={{ml: '4%', mr: '4%', mb: -5,mt: -1, position: 'absolute',
                         [theme.breakpoints.down('xl')]: {
                             position: 'static',mb: -3
                         },}}>
-        <img width={200} src={"/shopLogo.png"}/>
+        <img width={size} src={"/shopLogo.png"}/>
     </Typography>
     </Tooltip>);
 };

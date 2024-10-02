@@ -8,7 +8,6 @@ export default function Layout() {
     return (
         <Box>
             <Box sx={{
-
                 background: `url('/runner-3601960_1920.jpg'),radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%)`,
                 backgroundSize: 'inherit',
                 backgroundRepeat: 'no-repeat',
@@ -17,7 +16,7 @@ export default function Layout() {
                 alignContent:"space-between",
                 height: '100%',
             }}>
-                <NavBar />
+                <Box minHeight={200}><NavBar /></Box>
                 <Box
                     sx={{
                     display: 'flex',

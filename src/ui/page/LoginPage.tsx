@@ -32,7 +32,7 @@ const LoginPage = ({onLoginSuccess}:Props) => {
 
     }
     return (
-        <Container sx={{backgroundColor: "white"}} component="main" maxWidth="xs">
+        <Container sx={{backgroundColor: "transparent"}} component="main" maxWidth="xs">
             <Box
                 sx={{
                     display: 'flex',
@@ -42,8 +42,8 @@ const LoginPage = ({onLoginSuccess}:Props) => {
                 }}
             >
                 <Box sx={{m: -4}}><img
-                    src={"https://img.freepik.com/premium-vector/welcome-word-hand-lettering-design-vector-calligraphic-inscription-welcome-handwritten-text_110464-676.jpg?w=1380"}
-                    width={300}/>
+                    src={"/welcome.avif"}
+                    width={300} height={200}/>
                 </Box>
                 {isLoginFailed ? <Alert severity="error">Login Unsuccessful</Alert> : <></>}
                 <Box

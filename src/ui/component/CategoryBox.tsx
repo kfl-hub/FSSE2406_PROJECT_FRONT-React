@@ -54,11 +54,11 @@ export default function CategoryBox({productDtoList, handleNavigateToProductDeta
       ))
   };
   const renderAll = () => (
-    <Box>
+    <Box minWidth={"100%"}>
       <Box display={"flex"} flexDirection={"column"}
            justifyContent={"center"} justifyItems={"center"}
            alignItems={"center"} alignContent={"center"}
-           bgcolor={'rgba(0, 0, 0, 0.6)'}>
+           bgcolor={'rgba(0, 0, 0, 0.6)'} >
         <Typography color={"white"} sx={{fontSize: '6vh', color: 'white'}}>
           {renderTitle()}</Typography>
         <Button variant={"contained"} onMouseOver={handleDisableExpand} onClick={handleDisableExpand}sx={{mb:2}}><MinimizeIcon/></Button>

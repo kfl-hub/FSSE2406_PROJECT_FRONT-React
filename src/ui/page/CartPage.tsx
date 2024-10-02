@@ -153,6 +153,7 @@ export default function CartPage() {
                           <CheckoutButton
                             handleCheckoutOnClick={handleOpenTransactionDialog}
                             checkOutDisable={checkOutDisable}/>
+
                           <Dialog sx={{borderRadius: 10}} open={transactionDialogOpen}
                                   onClose={() => setTransactionDialogOpen(false)}
                                   maxWidth="sm" fullWidth>
