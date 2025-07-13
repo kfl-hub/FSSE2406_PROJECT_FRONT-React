@@ -14,9 +14,9 @@ export default function BottomNav() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <BottomNavigation
-        showLabels
+        showLabels sx={{ backgroundColor: 'black' }}
       >
-        <BottomNavigationAction onClick={scrollToTop} label="Top" icon={<VerticalAlignTopIcon />} />
+        <BottomNavigationAction onClick={scrollToTop} label="Back to the top" sx={{ color: 'white' }} icon={<VerticalAlignTopIcon sx={{ color: 'white' }}/>} />
         {/*<BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />*/}
 
       </BottomNavigation>

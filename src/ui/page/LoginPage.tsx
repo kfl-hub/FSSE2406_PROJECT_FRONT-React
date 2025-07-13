@@ -11,8 +11,8 @@ type Props={
 
 
 const LoginPage = ({onLoginSuccess}:Props) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('user@user.com');
+    const [password, setPassword] = useState('password');
     const [isLoginFailed, setIsLoginFailed] = useState(false);
     const loginUser = useContext(LoginUserContext);
 
@@ -79,7 +79,9 @@ const LoginPage = ({onLoginSuccess}:Props) => {
                 </Box>
             </Box>
             <Divider variant={"middle"}>or</Divider>
-            <GoogleLoginButton onClick={handleGoogleLogin}/>
+            <GoogleLoginButton onClick={handleGoogleLogin}
+                               style={{backgroundColor: 'black', color: 'white'}}
+            onMouseEnter={()=>{}}/>
         </Container>
     );
 };
