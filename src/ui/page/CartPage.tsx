@@ -148,6 +148,7 @@ export default function CartPage() {
                           <Typography variant={"h4"}>${grandTotal.toFixed(1)}</Typography>
                         </Box>
                         <BillStepper index={0}/>
+                        
                         <Box height={72} display={"flex"} alignItems={"center"}
                              justifyContent={"end"} alignContent={"center"}>
                           <CheckoutButton
